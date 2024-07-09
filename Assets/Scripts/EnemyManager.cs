@@ -5,13 +5,13 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     // 이동
-    public float speed = 0.1f;
+    public float speed = 0.005f;
     private bool isMoving = true;
-    private float stopDuration = 1.0f;
+    private float stopDuration = 1.5f;
 
     // 탐지
     public Transform player;
-    private float detectionRange = 1.7f;
+    public float detectionRange = 7f;
     private bool isDetection = false;
 
     // 체력
@@ -19,6 +19,7 @@ public class EnemyManager : MonoBehaviour
     public int currentHealth;
 
     // 공격
+    public float attackRange = 1.7f;
     public float attackRate = 1.0f;
     private float lastAttackTime = 0.0f;
     public int attackDamage = 10;
@@ -39,8 +40,8 @@ public class EnemyManager : MonoBehaviour
         isMoving = true;
     }
 
-    // 플레이어와의 거리 계산
-    private void CheckPlayerDistance()
+    // 플레이어와의 거리 계산 후 공격
+    private void CheckPlayerDistanceAttack()
     {
         // 플레이어와 적 사이의 거리를 계산
         float distanceToPlayer = Vector3.Distance(Player.transform.position, gameObject.transform.position);
@@ -56,6 +57,8 @@ public class EnemyManager : MonoBehaviour
             Debug.Log("플레이어 감지되지 않음.");
             isDetection = false;
         }
+        if(CanAttack())
+            Attack();
     }
 
     private bool CanAttack()
@@ -66,8 +69,19 @@ public class EnemyManager : MonoBehaviour
     private void Attack()
     {
         lastAttackTime = Time.time;
-        // Attack logic here
         Debug.Log("Attack!");
+
+        // 공격범위 안에 있는 지 확인
+        float distanceToPlayer = Vector3.Distance(Player.transform.position, gameObject.transform.position);
+        if(distanceToPlayer <= attackRange)
+        {
+            Debug.Log("플레이어 공격 당함 hp-");
+        }
+        else
+        {
+            Debug.Log("플레이어 공격 회피 ");
+        }
+
     }
 
     public void TakeDamage(int damage)
@@ -91,11 +105,7 @@ public class EnemyManager : MonoBehaviour
         if (collision.collider.tag == "Player") // 플레이어와 충돌 시
         {
             StartCoroutine(StopMoving(stopDuration));
-            Invoke("CheckPlayerDistance", stopDuration);
-            if (CanAttack())
-            {
-                Attack();
-            }
+            Invoke("CheckPlayerDistanceAttack", stopDuration);
         }
     }
 
