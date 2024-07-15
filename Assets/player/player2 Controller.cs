@@ -5,14 +5,18 @@ using UnityEngine;
 public class Player2Controller : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public int health = 100;
+    public int pl2health = 100;
 
     private Rigidbody2D rb;
     private Vector2 movement;
+    SpriteRenderer spriter;
+    Animator anim;
 
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriter = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -26,5 +30,12 @@ public class Player2Controller : MonoBehaviour
     {
         // 이동 처리
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+    }
+    void LateUpdate()
+    {
+        anim.SetFloat("Speed",movement.magnitude);
+        if (movement.x != 0){
+            spriter.flipX = movement.x <0;
+        }
     }
 }
