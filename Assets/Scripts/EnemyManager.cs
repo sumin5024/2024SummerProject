@@ -25,28 +25,11 @@ public class EnemyManager : MonoBehaviour
     public int attackDamage = 10;
 
     public GameObject Player;
-    private SpriteRenderer spriteRenderer;
 
     // 이동 메소드
     private void MoveTowardsPlayer()
     {
         transform.position = Vector3.MoveTowards(gameObject.transform.position, Player.transform.position, speed);
-    }
-
-    // 적의 방향을 업데이트
-    private void UpdateDirection()
-    {
-        // 플레이어의 위치를 확인하고 적의 방향을 조정
-        if (Player.transform.position.x < gameObject.transform.position.x)
-        {
-            // 플레이어가 적의 왼쪽에 있으면 스프라이트를 왼쪽으로 향하게 함
-            spriteRenderer.flipX = true;
-        }
-        else
-        {
-            // 플레이어가 적의 오른쪽에 있으면 스프라이트를 오른쪽으로 향하게 함
-            spriteRenderer.flipX = false;
-        }
     }
 
     // 플레이어와 충돌 시 잠시 멈추기
@@ -83,7 +66,6 @@ public class EnemyManager : MonoBehaviour
         return (Time.time - lastAttackTime > 1f / attackRate) && isDetection;
     }
 
-    // 플레이어를 공격
     private void Attack()
     {
         lastAttackTime = Time.time;
@@ -133,12 +115,10 @@ public class EnemyManager : MonoBehaviour
         {
             MoveTowardsPlayer();
         }
-        UpdateDirection();
     }
 
     void Start()
     {
         currentHealth = maxHealth;
-        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 }
