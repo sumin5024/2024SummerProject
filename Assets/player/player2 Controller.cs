@@ -50,6 +50,9 @@ public class Player2Controller : MonoBehaviour
 
     void Shoot()
     {
-        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        Debug.Log("Bullet fired by Player 2");
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
+        bulletRb.velocity = firePoint.right * 20f; // 총알의 속도 설정
     }
 }

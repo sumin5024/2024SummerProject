@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = transform.right * speed;
+        rb.velocity = transform.right * speed; // 총알이 발사되는 방향 설정 (transform.right 또는 transform.up 사용 가능)
     }
 
     void OnTriggerEnter2D(Collider2D hitInfo)
