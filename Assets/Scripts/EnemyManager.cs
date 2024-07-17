@@ -4,51 +4,35 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-
+    // ÀÌµ¿
     public float speed = 0.005f;
     private bool isMoving = true;
     private float stopDuration = 1.5f;
 
-
+    // Å½Áö
     public Transform player;
     public float detectionRange = 7f;
     private bool isDetection = false;
 
-
+    // Ã¼·Â
     public int maxHealth = 100;
     public int currentHealth;
 
-
+    // °ø°Ý
     public float attackRange = 1.7f;
     public float attackRate = 1.0f;
     private float lastAttackTime = 0.0f;
     public int attackDamage = 10;
 
     public GameObject Player;
-    private SpriteRenderer spriteRenderer;
 
-
-    private Attract_Item attractItem;
-
-
-    private void MoveTowardsTarget(Vector3 target)
+    // ÀÌµ¿ ¸Þ¼Òµå
+    private void MoveTowardsPlayer()
     {
-        transform.position = Vector3.MoveTowards(gameObject.transform.position, target, speed);
+        transform.position = Vector3.MoveTowards(gameObject.transform.position, Player.transform.position, speed);
     }
 
-
-    private void UpdateDirection(Vector3 target)
-    {
-        if (target.x < gameObject.transform.position.x)
-        {
-            spriteRenderer.flipX = true;
-        }
-        else
-        {
-            spriteRenderer.flipX = false;
-        }
-    }
-
+    // ÇÃ·¹ÀÌ¾î¿Í Ãæµ¹ ½Ã Àá½Ã ¸ØÃß±â
     private IEnumerator StopMoving(float duration)
     {
         isMoving = false;
@@ -56,17 +40,21 @@ public class EnemyManager : MonoBehaviour
         isMoving = true;
     }
 
+    // ÇÃ·¹ÀÌ¾î¿ÍÀÇ °Å¸® °è»ê ÈÄ °ø°Ý
     private void CheckPlayerDistanceAttack()
     {
+        // ÇÃ·¹ÀÌ¾î¿Í Àû »çÀÌÀÇ °Å¸®¸¦ °è»ê
         float distanceToPlayer = Vector3.Distance(Player.transform.position, gameObject.transform.position);
+
+        // °Å¸®°¡ °¨Áö ¹üÀ§ ÀÌ³»ÀÎÁö È®ÀÎ
         if (distanceToPlayer <= detectionRange)
         {
-            Debug.Log("í”Œë ˆì´ì–´ ê°ì§€ë¨!");
+            Debug.Log("ÇÃ·¹ÀÌ¾î °¨ÁöµÊ!");
             isDetection = true;
         }
         else
         {
-            Debug.Log("í”Œë ˆì´ì–´ ê°ì§€ë˜ì§€ ì•ŠìŒ.");
+            Debug.Log("ÇÃ·¹ÀÌ¾î °¨ÁöµÇÁö ¾ÊÀ½.");
             isDetection = false;
         }
         if(CanAttack())
@@ -83,16 +71,17 @@ public class EnemyManager : MonoBehaviour
         lastAttackTime = Time.time;
         Debug.Log("Attack!");
 
+        // °ø°Ý¹üÀ§ ¾È¿¡ ÀÖ´Â Áö È®ÀÎ
         float distanceToPlayer = Vector3.Distance(Player.transform.position, gameObject.transform.position);
         if(distanceToPlayer <= attackRange)
         {
-            Debug.Log("í”Œë ˆì´ì–´ì—ê²Œ í”¼í•´ë¥¼ ìž…íž˜.");
-           
+            Debug.Log("ÇÃ·¹ÀÌ¾î °ø°Ý ´çÇÔ hp-");
         }
         else
         {
-            Debug.Log("í”Œë ˆì´ì–´ê°€ ê³µê²© ë²”ìœ„ ë°–ì— ìžˆìŒ.");
+            Debug.Log("ÇÃ·¹ÀÌ¾î °ø°Ý È¸ÇÇ ");
         }
+
     }
 
     public void TakeDamage(int damage)
@@ -110,56 +99,26 @@ public class EnemyManager : MonoBehaviour
         Destroy(gameObject);
     }
 
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag == "Player")
+        if (collision.collider.tag == "Player") // ÇÃ·¹ÀÌ¾î¿Í Ãæµ¹ ½Ã
         {
             StartCoroutine(StopMoving(stopDuration));
             Invoke("CheckPlayerDistanceAttack", stopDuration);
         }
     }
 
+    void Update()
+    {
+        if (isMoving)
+        {
+            MoveTowardsPlayer();
+        }
+    }
+
     void Start()
     {
         currentHealth = maxHealth;
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        attractItem = FindObjectOfType<Attract_Item>(); 
-    }
-
-
-    void Update()
-    {
-        if (attractItem != null && attractItem.IsAttractActive())
-        {
-            MoveTowardsTarget(attractItem.GetTargetPosition());
-            UpdateDirection(attractItem.GetTargetPosition());
-        }
-        else
-        {
-            if (isMoving)
-            {
-                MoveTowardsPlayer();
-            }
-            UpdateDirection(Player.transform.position);
-        }
-    }
-
-
-    private void MoveTowardsPlayer()
-    {
-        transform.position = Vector3.MoveTowards(gameObject.transform.position, Player.transform.position, speed);
-    }
-
-
-    private void UpdateDirection()
-    {
-        if (Player.transform.position.x < gameObject.transform.position.x)
-        {
-            spriteRenderer.flipX = true;
-        }
-        else
-        {
-            spriteRenderer.flipX = false;
-        }
     }
 }
