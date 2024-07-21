@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    private Animator animator;
+    private BoxCollider2D bc;
 
     public float speed = 0.005f;
     private bool isMoving = true;
@@ -17,6 +19,8 @@ public class EnemyManager : MonoBehaviour
 
     public int maxHealth = 100;
     public int currentHealth;
+
+    
 
 
     public float attackRange = 1.7f;
@@ -106,8 +110,11 @@ public class EnemyManager : MonoBehaviour
 
     private void Die()
     {
+        animator.SetBool("Dead", true);
+        StartCoroutine(StopMoving(1f));
+        bc.isTrigger = true;
         Debug.Log("Enemy Died");
-        Destroy(gameObject);
+        Destroy(gameObject, 1f);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -123,7 +130,9 @@ public class EnemyManager : MonoBehaviour
     {
         currentHealth = maxHealth;
         spriteRenderer = GetComponent<SpriteRenderer>();
-        attractItem = FindObjectOfType<Attract_Item>(); 
+        attractItem = FindObjectOfType<Attract_Item>();
+        animator = GetComponent<Animator>();
+        bc = GetComponent<BoxCollider2D>();
     }
 
 
