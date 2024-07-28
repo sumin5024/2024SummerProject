@@ -36,7 +36,7 @@ public class Player2Controller : MonoBehaviour
     void FixedUpdate()
     {
         // 이동 처리
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + movement.normalized * moveSpeed * Time.fixedDeltaTime);
     }
 
     void LateUpdate()

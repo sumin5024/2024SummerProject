@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public int pl1health = 100;
+    public int pl1health;
+    public int pl1maxhealth=100;
     public GameObject bulletPrefab;
     public Transform firePoint;
 
@@ -36,7 +37,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         // 이동 처리
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + movement.normalized * moveSpeed * Time.fixedDeltaTime);
     }
 
     void LateUpdate()
