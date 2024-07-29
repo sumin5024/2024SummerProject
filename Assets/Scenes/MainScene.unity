@@ -157,7 +157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   pl2health: 100
-  bulletPrefab: {fileID: 1621609229}
+  bulletPrefab: {fileID: 6210878583170791971, guid: c261d336d5fdb45bb89aecdb61d615a6, type: 3}
   firePoint: {fileID: 106469926}
 --- !u!50 &2146917
 Rigidbody2D:
@@ -1080,7 +1080,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   pl1health: 100
-  bulletPrefab: {fileID: 1621609229}
+  pl1maxhealth: 100
+  bulletPrefab: {fileID: 6210878583170791971, guid: c261d336d5fdb45bb89aecdb61d615a6, type: 3}
   firePoint: {fileID: 804780371}
 --- !u!70 &1053571404
 CapsuleCollider2D:
@@ -1360,11 +1361,6 @@ Transform:
   - {fileID: 159785532}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1621609229 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6210878583170791971, guid: c261d336d5fdb45bb89aecdb61d615a6, type: 3}
-  m_PrefabInstance: {fileID: 1031310156}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1729516087
 GameObject:
   m_ObjectHideFlags: 0
