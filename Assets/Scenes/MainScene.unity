@@ -1151,7 +1151,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7a8450f903ce4ad091e49f008cd5796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 1053571400}
+  player1Transform: {fileID: 1053571400}
+  player2Transform: {fileID: 2146920}
   attractDuration: 10
   cooldownDuration: 20
   attractItemImage: {fileID: 1729648822}
