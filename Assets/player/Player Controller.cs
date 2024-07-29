@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb;
     private Vector2 movement;
+    private Vector2 lastMovement; // 마지막 움직인 방향
     SpriteRenderer spriter;
     Animator anim;
 
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
+<<<<<<< Updated upstream
         // 플레이어 이동 방향에 따라 firePoint 회전
         if (movement != Vector2.zero)
         {
@@ -48,6 +50,41 @@ public class PlayerController : MonoBehaviour
         {
             Shoot();
             nextFireTime = Time.time + 1f / fireRate;
+=======
+        // 마지막 움직인 방향 저장
+        if (movement != Vector2.zero)
+        {
+            lastMovement = movement;
+        }
+
+        // 총 쏘기
+        if (Input.GetKeyDown(KeyCode.BackQuote) && Time.time >= nextFireTime)
+        {
+            Shoot();
+            nextFireTime = Time.time + 1f / fireRate;
+        }
+    }
+
+    void Shoot()
+    {
+        if (bulletPrefab != null && firePoint != null)
+        {
+            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            if (bulletScript != null)
+            {
+                bulletScript.SetDirection(lastMovement.normalized); // 마지막 움직인 방향으로 발사
+                Debug.Log("Player1 fired bullet from: " + firePoint.position);
+            }
+            else
+            {
+                Debug.LogError("Bullet script not found on the bullet prefab.");
+            }
+        }
+        else
+        {
+            Debug.LogError("BulletPrefab or FirePoint is not assigned.");
+>>>>>>> Stashed changes
         }
     }
 

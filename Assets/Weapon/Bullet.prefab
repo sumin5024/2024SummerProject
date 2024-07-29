@@ -75,9 +75,15 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
+<<<<<<< Updated upstream:Assets/Weapon/Bullet.prefab
   m_SortingOrder: 0
   m_Sprite: {fileID: -1327499133, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
   m_Color: {r: 0.9150943, g: 0.09927912, b: 0.09927912, a: 1}
+=======
+  m_SortingOrder: 1
+  m_Sprite: {fileID: -537537479, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+>>>>>>> Stashed changes:Assets/Bullet.prefab
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -161,4 +167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e2d98a1d2511f044b9324968ecd700c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream:Assets/Weapon/Bullet.prefab
   speed: 10
+=======
+  speed: 20
+>>>>>>> Stashed changes:Assets/Bullet.prefab
