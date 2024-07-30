@@ -112,7 +112,7 @@ public class EnemyManager : MonoBehaviour
     {
         animator.SetBool("Dead", true);
         StartCoroutine(StopMoving(1f));
-        bc.isTrigger = true;
+        //bc.isTrigger = true;
         Debug.Log("Enemy Died");
         Destroy(gameObject, 1f);
     }
@@ -132,7 +132,7 @@ public class EnemyManager : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         attractItem = FindObjectOfType<Attract_Item>();
         animator = GetComponent<Animator>();
-        bc = GetComponent<BoxCollider2D>();
+        //bc = GetComponent<BoxCollider2D>();
     }
 
 
