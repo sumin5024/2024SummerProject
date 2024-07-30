@@ -8,10 +8,15 @@ public class Bullet : MonoBehaviour
     public int damage = 40;
     private Rigidbody2D rb;
 
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = transform.right * speed; // 총알이 발사되는 방향 설정 (transform.right 또는 transform.up 사용 가능)
+        rb.gravityScale = 0; // 총알의 중력 영향을 받지 않도록 설정
+    }
+
+    public void SetDirection(Vector2 direction)
+    {
+        rb.velocity = direction * speed; // 총알이 발사되는 방향 설정
     }
 
     void OnTriggerEnter2D(Collider2D hitInfo)
