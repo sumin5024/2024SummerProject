@@ -6,13 +6,12 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public int pl1health;
-    public int pl1maxhealth = 100;
+    public int pl1maxhealth=100;
     public GameObject bulletPrefab;
     public Transform firePoint;
 
     private Rigidbody2D rb;
     private Vector2 movement;
-    private Vector2 lastMovementDirection;
     SpriteRenderer spriter;
     Animator anim;
 
@@ -28,11 +27,6 @@ public class PlayerController : MonoBehaviour
         // 입력 처리
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
-
-        if (movement != Vector2.zero)
-        {
-            lastMovementDirection = movement.normalized;
-        }
 
         if (Input.GetKeyDown(KeyCode.Alpha1)) // 키보드 숫자 1 키
         {
@@ -58,8 +52,8 @@ public class PlayerController : MonoBehaviour
     void Shoot()
     {
         Debug.Log("Bullet fired by Player 1");
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
-        bulletRb.velocity = lastMovementDirection * 20f; // 총알의 속도 설정
+        bulletRb.velocity = firePoint.right * 20f; // 총알의 속도 설정
     }
 }

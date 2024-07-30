@@ -11,7 +11,6 @@ public class Player2Controller : MonoBehaviour
 
     private Rigidbody2D rb;
     private Vector2 movement;
-    private Vector2 lastMovementDirection;
     SpriteRenderer spriter;
     Animator anim;
 
@@ -27,11 +26,6 @@ public class Player2Controller : MonoBehaviour
         // 입력 처리
         movement.x = Input.GetAxisRaw("Horizontal2");
         movement.y = Input.GetAxisRaw("Vertical2");
-
-        if (movement != Vector2.zero)
-        {
-            lastMovementDirection = movement.normalized;
-        }
 
         if (Input.GetKeyDown(KeyCode.O)) // O 키
         {
@@ -57,8 +51,8 @@ public class Player2Controller : MonoBehaviour
     void Shoot()
     {
         Debug.Log("Bullet fired by Player 2");
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
-        bulletRb.velocity = lastMovementDirection * 20f; // 총알의 속도 설정
+        bulletRb.velocity = firePoint.right * 20f; // 총알의 속도 설정
     }
 }
