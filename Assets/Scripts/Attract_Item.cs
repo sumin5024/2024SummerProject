@@ -1,84 +1,160 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Attract_Item : MonoBehaviour
 {
-    public Transform playerTransform; 
-    private Vector3 targetPosition;
+    public Transform player1Transform; // 플레이어 1의 Transform
+    public Transform player2Transform; // 플레이어 2의 Transform
+
+    private Vector3 targetPositionPlayer1;
+    private Vector3 targetPositionPlayer2;
+
     public float attractDuration = 10f;
     public float cooldownDuration = 20f;
-    private bool isAttractActive = false;
-    private bool isCooldown = false;
 
-    public GameObject attractItemImage; 
+    private bool isAttractActivePlayer1 = false;
+    private bool isCooldownPlayer1 = false;
+
+    private bool isAttractActivePlayer2 = false;
+    private bool isCooldownPlayer2 = false;
+
+    public GameObject attractItemImagePlayer1; 
+    public GameObject attractItemImagePlayer2;
 
     void Start()
     {
-        if (attractItemImage != null)
+        if (attractItemImagePlayer1 != null)
         {
-            attractItemImage.SetActive(false); 
+            attractItemImagePlayer1.SetActive(false); 
+        }
+
+        if (attractItemImagePlayer2 != null)
+        {
+            attractItemImagePlayer2.SetActive(false); 
         }
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P) && !isCooldown)
+        if (Input.GetKeyDown(KeyCode.Q) && !isCooldownPlayer1)
         {
-            Debug.Log("P key pressed, storing player position");
-            StorePlayerPosition();
-            UseAttractItem();
+            Debug.Log("플레이어 1 키가 눌려졌습니다. 플레이어 위치 저장 중...");
+            StorePlayer1Position(player1Transform);
+            UseAttractItemPlayer1();
+        }
+        if (Input.GetKeyDown(KeyCode.O) && !isCooldownPlayer2)
+        {
+            Debug.Log("플레이어 2 키가 눌려졌습니다. 플레이어 위치 저장 중...");
+            StorePlayer2Position(player2Transform);
+            UseAttractItemPlayer2();
         }
     }
 
-    void StorePlayerPosition()
+    void StorePlayer1Position(Transform playerTransform)
     {
         if (playerTransform != null)
         {
-            targetPosition = playerTransform.position;
-            targetPosition.z = 0; 
-            Debug.Log("Target position set to: " + targetPosition);
+            targetPositionPlayer1 = playerTransform.position;
+            targetPositionPlayer1.z = 0; 
+            Debug.Log("플레이어 1 목표 위치 설정: " + targetPositionPlayer1);
         }
         else
         {
-            Debug.LogError("Player Transform is not assigned.");
+            Debug.LogError("플레이어 1 Transform이 지정되지 않았습니다.");
         }
     }
 
-    void UseAttractItem()
+    void StorePlayer2Position(Transform playerTransform)
     {
-        if (attractItemImage != null)
+        if (playerTransform != null)
         {
-            attractItemImage.transform.position = targetPosition; 
-            attractItemImage.SetActive(true); 
+            targetPositionPlayer2 = playerTransform.position;
+            targetPositionPlayer2.z = 0; 
+            Debug.Log("플레이어 2 목표 위치 설정: " + targetPositionPlayer2);
         }
-        StartCoroutine(ActivateAttract());
+        else
+        {
+            Debug.LogError("플레이어 2 Transform이 지정되지 않았습니다.");
+        }
     }
 
-    IEnumerator ActivateAttract()
+    void UseAttractItemPlayer1()
     {
-        Debug.Log("Attract item activated");
-        isAttractActive = true;
-        isCooldown = true;
+        if (attractItemImagePlayer1 != null)
+        {
+            attractItemImagePlayer1.transform.position = targetPositionPlayer1; 
+            attractItemImagePlayer1.SetActive(true); 
+        }
+        StartCoroutine(ActivateAttractPlayer1());
+    }
+
+    void UseAttractItemPlayer2()
+    {
+        if (attractItemImagePlayer2 != null)
+        {
+            attractItemImagePlayer2.transform.position = targetPositionPlayer2; 
+            attractItemImagePlayer2.SetActive(true); 
+        }
+        StartCoroutine(ActivateAttractPlayer2());
+    }
+
+    IEnumerator ActivateAttractPlayer1()
+    {
+        Debug.Log("플레이어 1 아이템 활성화됨");
+        isAttractActivePlayer1 = true;
+        isCooldownPlayer1 = true;
         yield return new WaitForSeconds(attractDuration);
-        isAttractActive = false;
-        if (attractItemImage != null)
+        isAttractActivePlayer1 = false;
+        if (attractItemImagePlayer1 != null)
         {
-            attractItemImage.SetActive(false); 
+            attractItemImagePlayer1.SetActive(false); 
         }
-        Debug.Log("Attract item deactivated");
+        Debug.Log("플레이어 1 아이템 비활성화됨");
         yield return new WaitForSeconds(cooldownDuration);
-        isCooldown = false;
-        Debug.Log("Attract item cooldown finished");
+        isCooldownPlayer1 = false;
+        Debug.Log("플레이어 1 쿨다운 완료");
     }
 
-    public bool IsAttractActive()
+    IEnumerator ActivateAttractPlayer2()
     {
-        return isAttractActive;
+        Debug.Log("플레이어 2 아이템 활성화됨");
+        isAttractActivePlayer2 = true;
+        isCooldownPlayer2 = true;
+        yield return new WaitForSeconds(attractDuration);
+        isAttractActivePlayer2 = false;
+        if (attractItemImagePlayer2 != null)
+        {
+            attractItemImagePlayer2.SetActive(false); 
+        }
+        Debug.Log("플레이어 2 아이템 비활성화됨");
+        yield return new WaitForSeconds(cooldownDuration);
+        isCooldownPlayer2 = false;
+        Debug.Log("플레이어 2 쿨다운 완료");
     }
 
-    public Vector3 GetTargetPosition()
+    public bool IsAttractActive(int playerNumber)
     {
-        return targetPosition;
+        if (playerNumber == 1)
+        {
+            return isAttractActivePlayer1;
+        }
+        else if (playerNumber == 2)
+        {
+            return isAttractActivePlayer2;
+        }
+        return false;
+    }
+
+    public Vector3 GetTargetPosition(int playerNumber)
+    {
+        if (playerNumber == 1)
+        {
+            return targetPositionPlayer1;
+        }
+        else if (playerNumber == 2)
+        {
+            return targetPositionPlayer2;
+        }
+        return Vector3.zero;
     }
 }
