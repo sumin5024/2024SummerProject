@@ -367,6 +367,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Thief
       objectReference: {fileID: 0}
+    - target: {fileID: 5798487303507838516, guid: 6b4953020074a34498f87d5e0550ffd4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -387,6 +391,10 @@ PrefabInstance:
     - target: {fileID: 3936318543585895336, guid: befd2eb17b8a40d42abf05db1c28100e, type: 3}
       propertyPath: m_Name
       value: Skeleton
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936318543585895336, guid: befd2eb17b8a40d42abf05db1c28100e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8502014571975554507, guid: befd2eb17b8a40d42abf05db1c28100e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -428,10 +436,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9206481598896429207, guid: befd2eb17b8a40d42abf05db1c28100e, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: d1bcc200fa1bc3c4584364d2ec0847b8, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3936318543585895336, guid: befd2eb17b8a40d42abf05db1c28100e, type: 3}
+      insertIndex: 5
+      addedObject: {fileID: 1884691699}
   m_SourcePrefab: {fileID: 100100000, guid: befd2eb17b8a40d42abf05db1c28100e, type: 3}
 --- !u!1 &24901230
 GameObject:
@@ -469,6 +484,7 @@ MonoBehaviour:
   spawnYLocation: 10
   Enemy1: {fileID: 2577102462455862533}
   Enemy2: {fileID: 54296405}
+  Enemy3: {fileID: 1884691693}
 --- !u!4 &24901232
 Transform:
   m_ObjectHideFlags: 0
@@ -631,6 +647,10 @@ PrefabInstance:
     - target: {fileID: 733043587678659334, guid: a95bc0d7c5e634642b7add3f1350a1a1, type: 3}
       propertyPath: m_Name
       value: Demon
+      objectReference: {fileID: 0}
+    - target: {fileID: 733043587678659334, guid: a95bc0d7c5e634642b7add3f1350a1a1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1291209902081249491, guid: a95bc0d7c5e634642b7add3f1350a1a1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1049,6 +1069,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fast
       objectReference: {fileID: 0}
+    - target: {fileID: 478172353122594425, guid: 2f0e7fc863b1144428e623f71b15e685, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2658965563182869191, guid: 2f0e7fc863b1144428e623f71b15e685, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.28
@@ -1409,9 +1433,9 @@ Transform:
   m_Children:
   - {fileID: 7554675676417233924}
   - {fileID: 54296406}
+  - {fileID: 1878550743}
   - {fileID: 1464904071}
   - {fileID: 1429764673}
-  - {fileID: 1878550743}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1256706493
@@ -1775,6 +1799,32 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8502014571975554507, guid: befd2eb17b8a40d42abf05db1c28100e, type: 3}
   m_PrefabInstance: {fileID: 21881391}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1884691693 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3936318543585895336, guid: befd2eb17b8a40d42abf05db1c28100e, type: 3}
+  m_PrefabInstance: {fileID: 21881391}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1884691699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884691693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7aa945ba69da604392a5a726df76fb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.005
+  player: {fileID: 1053571400}
+  maxHealth: 100
+  currentHealth: 0
+  Player: {fileID: 1053571398}
+  detectionRange: 7
+  attackRange: 1.7
+  attackRate: 2
+  attackDamage: 10
 --- !u!1 &1948258152
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] int spawnYLocation = 3;
     [SerializeField] GameObject Enemy1;
     [SerializeField] GameObject Enemy2;
+    [SerializeField] GameObject Enemy3;
 
 
     IEnumerator SpawnEnemy()
@@ -22,6 +23,7 @@ public class EnemySpawner : MonoBehaviour
         YLocation = Random.Range(minYLocation, maxYLocation);
         Instantiate(Enemy1, new Vector3(10, YLocation), Quaternion.identity);
         Instantiate(Enemy2, new Vector3(10, YLocation), Quaternion.identity);
+        Instantiate(Enemy3, new Vector3(10, YLocation), Quaternion.identity);
     }
     
     IEnumerator Start()
