@@ -1,160 +1,84 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Attract_Item : MonoBehaviour
 {
-    public Transform player1Transform; // 플레이어 1의 Transform
-    public Transform player2Transform; // 플레이어 2의 Transform
-
-    private Vector3 targetPositionPlayer1;
-    private Vector3 targetPositionPlayer2;
-
+    public Transform playerTransform; 
+    private Vector3 targetPosition;
     public float attractDuration = 10f;
     public float cooldownDuration = 20f;
+    private bool isAttractActive = false;
+    private bool isCooldown = false;
 
-    private bool isAttractActivePlayer1 = false;
-    private bool isCooldownPlayer1 = false;
-
-    private bool isAttractActivePlayer2 = false;
-    private bool isCooldownPlayer2 = false;
-
-    public GameObject attractItemImagePlayer1; 
-    public GameObject attractItemImagePlayer2;
+    public GameObject attractItemImage; 
 
     void Start()
     {
-        if (attractItemImagePlayer1 != null)
+        if (attractItemImage != null)
         {
-            attractItemImagePlayer1.SetActive(false); 
-        }
-
-        if (attractItemImagePlayer2 != null)
-        {
-            attractItemImagePlayer2.SetActive(false); 
+            attractItemImage.SetActive(false); 
         }
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && !isCooldownPlayer1)
+        if (Input.GetKeyDown(KeyCode.P) && !isCooldown)
         {
-            Debug.Log("플레이어 1 키가 눌려졌습니다. 플레이어 위치 저장 중...");
-            StorePlayer1Position(player1Transform);
-            UseAttractItemPlayer1();
-        }
-        if (Input.GetKeyDown(KeyCode.O) && !isCooldownPlayer2)
-        {
-            Debug.Log("플레이어 2 키가 눌려졌습니다. 플레이어 위치 저장 중...");
-            StorePlayer2Position(player2Transform);
-            UseAttractItemPlayer2();
+            Debug.Log("P key pressed, storing player position");
+            StorePlayerPosition();
+            UseAttractItem();
         }
     }
 
-    void StorePlayer1Position(Transform playerTransform)
+    void StorePlayerPosition()
     {
         if (playerTransform != null)
         {
-            targetPositionPlayer1 = playerTransform.position;
-            targetPositionPlayer1.z = 0; 
-            Debug.Log("플레이어 1 목표 위치 설정: " + targetPositionPlayer1);
+            targetPosition = playerTransform.position;
+            targetPosition.z = 0; 
+            Debug.Log("Target position set to: " + targetPosition);
         }
         else
         {
-            Debug.LogError("플레이어 1 Transform이 지정되지 않았습니다.");
+            Debug.LogError("Player Transform is not assigned.");
         }
     }
 
-    void StorePlayer2Position(Transform playerTransform)
+    void UseAttractItem()
     {
-        if (playerTransform != null)
+        if (attractItemImage != null)
         {
-            targetPositionPlayer2 = playerTransform.position;
-            targetPositionPlayer2.z = 0; 
-            Debug.Log("플레이어 2 목표 위치 설정: " + targetPositionPlayer2);
+            attractItemImage.transform.position = targetPosition; 
+            attractItemImage.SetActive(true); 
         }
-        else
-        {
-            Debug.LogError("플레이어 2 Transform이 지정되지 않았습니다.");
-        }
+        StartCoroutine(ActivateAttract());
     }
 
-    void UseAttractItemPlayer1()
+    IEnumerator ActivateAttract()
     {
-        if (attractItemImagePlayer1 != null)
-        {
-            attractItemImagePlayer1.transform.position = targetPositionPlayer1; 
-            attractItemImagePlayer1.SetActive(true); 
-        }
-        StartCoroutine(ActivateAttractPlayer1());
-    }
-
-    void UseAttractItemPlayer2()
-    {
-        if (attractItemImagePlayer2 != null)
-        {
-            attractItemImagePlayer2.transform.position = targetPositionPlayer2; 
-            attractItemImagePlayer2.SetActive(true); 
-        }
-        StartCoroutine(ActivateAttractPlayer2());
-    }
-
-    IEnumerator ActivateAttractPlayer1()
-    {
-        Debug.Log("플레이어 1 아이템 활성화됨");
-        isAttractActivePlayer1 = true;
-        isCooldownPlayer1 = true;
+        Debug.Log("Attract item activated");
+        isAttractActive = true;
+        isCooldown = true;
         yield return new WaitForSeconds(attractDuration);
-        isAttractActivePlayer1 = false;
-        if (attractItemImagePlayer1 != null)
+        isAttractActive = false;
+        if (attractItemImage != null)
         {
-            attractItemImagePlayer1.SetActive(false); 
+            attractItemImage.SetActive(false); 
         }
-        Debug.Log("플레이어 1 아이템 비활성화됨");
+        Debug.Log("Attract item deactivated");
         yield return new WaitForSeconds(cooldownDuration);
-        isCooldownPlayer1 = false;
-        Debug.Log("플레이어 1 쿨다운 완료");
+        isCooldown = false;
+        Debug.Log("Attract item cooldown finished");
     }
 
-    IEnumerator ActivateAttractPlayer2()
+    public bool IsAttractActive()
     {
-        Debug.Log("플레이어 2 아이템 활성화됨");
-        isAttractActivePlayer2 = true;
-        isCooldownPlayer2 = true;
-        yield return new WaitForSeconds(attractDuration);
-        isAttractActivePlayer2 = false;
-        if (attractItemImagePlayer2 != null)
-        {
-            attractItemImagePlayer2.SetActive(false); 
-        }
-        Debug.Log("플레이어 2 아이템 비활성화됨");
-        yield return new WaitForSeconds(cooldownDuration);
-        isCooldownPlayer2 = false;
-        Debug.Log("플레이어 2 쿨다운 완료");
+        return isAttractActive;
     }
 
-    public bool IsAttractActive(int playerNumber)
+    public Vector3 GetTargetPosition()
     {
-        if (playerNumber == 1)
-        {
-            return isAttractActivePlayer1;
-        }
-        else if (playerNumber == 2)
-        {
-            return isAttractActivePlayer2;
-        }
-        return false;
-    }
-
-    public Vector3 GetTargetPosition(int playerNumber)
-    {
-        if (playerNumber == 1)
-        {
-            return targetPositionPlayer1;
-        }
-        else if (playerNumber == 2)
-        {
-            return targetPositionPlayer2;
-        }
-        return Vector3.zero;
+        return targetPosition;
     }
 }
