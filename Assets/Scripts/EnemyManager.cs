@@ -58,6 +58,11 @@ public class EnemyManager : MonoBehaviour
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
+            Collider2D Ecollider = GetComponent<Collider2D>();
+            if(Ecollider != null)
+            {
+                Ecollider.enabled = false;
+            }
             Die();
         }
     }
@@ -69,6 +74,11 @@ public class EnemyManager : MonoBehaviour
         //bc.isTrigger = true;
         Debug.Log("Enemy Died");
         Destroy(gameObject, 1f);
+        EnemySpawner.Instance.enemiesRemaining--;
+        if (EnemySpawner.Instance.enemiesRemaining == 0)
+        {
+            EnemySpawner.Instance.NextWave();
+        }
     }
 
 
@@ -81,6 +91,7 @@ public class EnemyManager : MonoBehaviour
         attractItem = FindObjectOfType<Attract_Item>();
         animator = GetComponent<Animator>();
         //bc = GetComponent<BoxCollider2D>();
+        
     }
 
 

@@ -23,7 +23,7 @@ public class HUD : MonoBehaviour
             case InfoType.Exp:
                 break;
             case InfoType.Health:
-                float CurHealth1 = PlayerController.instance.health;
+                //float CurHealth1 = PlayerController.instance.health;
                 break;
             case InfoType.Kill:
                 break;

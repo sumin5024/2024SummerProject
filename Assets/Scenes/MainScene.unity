@@ -482,9 +482,80 @@ MonoBehaviour:
   YLocation: 0
   minRespawnTime: 0
   spawnYLocation: 10
-  Enemy1: {fileID: 2577102462455862533}
-  Enemy2: {fileID: 54296405}
-  Enemy3: {fileID: 1884691693}
+  enemiesRemaining: 0
+  waves:
+  - enemyCount: 0a00000000000000000000000000000000000000
+    enemyPrefab:
+    - {fileID: 2577102462455862533}
+    - {fileID: 54296405}
+    - {fileID: 1884691693}
+    - {fileID: 1303681307}
+    - {fileID: 71091726}
+  - enemyCount: 0500000003000000000000000000000000000000
+    enemyPrefab:
+    - {fileID: 2577102462455862533}
+    - {fileID: 54296405}
+    - {fileID: 1884691693}
+    - {fileID: 1303681307}
+    - {fileID: 71091726}
+  - enemyCount: 0f00000003000000000000000000000000000000
+    enemyPrefab:
+    - {fileID: 2577102462455862533}
+    - {fileID: 54296405}
+    - {fileID: 1884691693}
+    - {fileID: 1303681307}
+    - {fileID: 71091726}
+  - enemyCount: 0f00000005000000030000000000000000000000
+    enemyPrefab:
+    - {fileID: 2577102462455862533}
+    - {fileID: 54296405}
+    - {fileID: 1884691693}
+    - {fileID: 1303681307}
+    - {fileID: 71091726}
+  - enemyCount: 140000000a000000050000000000000000000000
+    enemyPrefab:
+    - {fileID: 2577102462455862533}
+    - {fileID: 54296405}
+    - {fileID: 1884691693}
+    - {fileID: 1303681307}
+    - {fileID: 71091726}
+  - enemyCount: 140000000a0000000a0000000000000000000000
+    enemyPrefab:
+    - {fileID: 2577102462455862533}
+    - {fileID: 54296405}
+    - {fileID: 1884691693}
+    - {fileID: 1303681307}
+    - {fileID: 71091726}
+  - enemyCount: 1900000000000000140000000000000000000000
+    enemyPrefab:
+    - {fileID: 2577102462455862533}
+    - {fileID: 54296405}
+    - {fileID: 1884691693}
+    - {fileID: 1303681307}
+    - {fileID: 71091726}
+  - enemyCount: 1e00000000000000000000000a00000000000000
+    enemyPrefab:
+    - {fileID: 2577102462455862533}
+    - {fileID: 54296405}
+    - {fileID: 1884691693}
+    - {fileID: 1303681307}
+    - {fileID: 71091726}
+  - enemyCount: 00000000140000000a0000000a00000000000000
+    enemyPrefab:
+    - {fileID: 2577102462455862533}
+    - {fileID: 54296405}
+    - {fileID: 1884691693}
+    - {fileID: 1303681307}
+    - {fileID: 71091726}
+  - enemyCount: 0000000000000000000000000000000001000000
+    enemyPrefab:
+    - {fileID: 2577102462455862533}
+    - {fileID: 54296405}
+    - {fileID: 1884691693}
+    - {fileID: 1303681307}
+    - {fileID: 71091726}
+  spawnTime: 0
+  currentWaveIndex: 0
 --- !u!4 &24901232
 Transform:
   m_ObjectHideFlags: 0
@@ -509,6 +580,11 @@ GameObject:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2658965563182869191, guid: 2f0e7fc863b1144428e623f71b15e685, type: 3}
   m_PrefabInstance: {fileID: 1006482943}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &71091726 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 733043587678659334, guid: a95bc0d7c5e634642b7add3f1350a1a1, type: 3}
+  m_PrefabInstance: {fileID: 173413788}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &106469925
 GameObject:
@@ -1488,6 +1564,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1303681307 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5798487303507838516, guid: 6b4953020074a34498f87d5e0550ffd4, type: 3}
+  m_PrefabInstance: {fileID: 21671498}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1429764673 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1291209902081249491, guid: a95bc0d7c5e634642b7add3f1350a1a1, type: 3}
