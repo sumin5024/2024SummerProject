@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -9,6 +10,16 @@ public class PlayerController : MonoBehaviour
     public int pl1maxhealth = 100;
     public GameObject bulletPrefab;
     public Transform firePoint;
+
+    //스피드 부스트 영역
+    public float SpeedBoostMul = 2f;
+    public float SpeedBoostDuration = 8f;
+    public float SpeedBoostCooldownDuration = 10f;
+    private bool isSpeedBoostActive = false;
+    private bool isSpeedBoostCooldown = false;
+    //스피드 부스트 아이템 영역 끝
+
+
 
     private Rigidbody2D rb;
     private Vector2 movement;
@@ -38,6 +49,10 @@ public class PlayerController : MonoBehaviour
         {
             Shoot();
         }
+
+        if(Input.GetKeyDown(KeyCode.Alpha2) && !isSpeedBoostActive && !isSpeedBoostCooldown) {
+            StartCoroutine(ActivateSpeedBoost());
+        }
     }
 
     void FixedUpdate()
@@ -61,5 +76,26 @@ public class PlayerController : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
         bulletRb.velocity = lastMovementDirection * 20f; // 총알의 속도 설정
+    }
+    IEnumerator ActivateSpeedBoost() {
+        isSpeedBoostActive = true;
+        moveSpeed *= SpeedBoostMul;
+
+        yield return new WaitForSeconds(SpeedBoostDuration);
+
+        moveSpeed /=SpeedBoostMul;
+        isSpeedBoostActive = !isSpeedBoostActive;
+
+        StartCoroutine(SpeedBoostCooldown());
+
+    }
+
+    IEnumerator SpeedBoostCooldown() {
+        isSpeedBoostCooldown = true;
+
+        yield return new WaitForSeconds(SpeedBoostCooldownDuration);
+
+         isSpeedBoostCooldown = false;
+
     }
 }
