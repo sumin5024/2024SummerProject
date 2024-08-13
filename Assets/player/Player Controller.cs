@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
             Shoot();
         }
 
-        if(Input.GetKeyDown(KeyCode.Alpha2) && !isSpeedBoostActive && !isSpeedBoostCooldown) {
+        if(Input.GetKeyDown(KeyCode.E) && !isSpeedBoostActive && !isSpeedBoostCooldown) {
             StartCoroutine(ActivateSpeedBoost());
         }
     }
