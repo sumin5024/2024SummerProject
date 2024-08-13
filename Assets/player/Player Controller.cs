@@ -1,20 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class Player1Controller : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public int pl1health;
-    public int pl1maxhealth = 100;
-    public GameObject bulletPrefab;
+    public int pl1health = 100;
+    public Weapon[] weapons; // 무기 배열
     public Transform firePoint;
 
+    private int currentWeaponIndex = 0; // 현재 무기 인덱스
     private Rigidbody2D rb;
     private Vector2 movement;
     private Vector2 lastMovementDirection;
-    SpriteRenderer spriter;
-    Animator anim;
+    private SpriteRenderer spriter;
+    private Animator anim;
 
     void Awake()
     {
@@ -34,9 +32,18 @@ public class PlayerController : MonoBehaviour
             lastMovementDirection = movement.normalized;
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1)) // 키보드 숫자 1 키
+        if (Input.GetKeyDown(KeyCode.Alpha1)) // 숫자 1 키
         {
             Shoot();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2)) // [ 키
+        {
+            PreviousWeapon();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3)) // ] 키
+        {
+            NextWeapon();
         }
     }
 
@@ -57,9 +64,79 @@ public class PlayerController : MonoBehaviour
 
     void Shoot()
     {
-        Debug.Log("Bullet fired by Player 1");
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-        Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
-        bulletRb.velocity = lastMovementDirection * 20f; // 총알의 속도 설정
+        if (weapons.Length == 0)
+        {
+            Debug.LogError("No weapons assigned!");
+            return;
+        }
+
+        if (currentWeaponIndex < 0 || currentWeaponIndex >= weapons.Length)
+        {
+            Debug.LogError("Invalid weapon index!");
+            return;
+        }
+
+        Weapon currentWeapon = weapons[currentWeaponIndex];
+
+        if (currentWeapon.weaponType == WeaponType.Pistol)
+        {
+            GameObject bullet = Instantiate(currentWeapon.bulletPrefab, firePoint.position, Quaternion.identity);
+            Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
+            bulletRb.velocity = lastMovementDirection * 20f;
+        }
+        else if (currentWeapon.weaponType == WeaponType.Shotgun)
+        {
+            float spreadAngle = 10f; // 총알 퍼지는 각도
+            int bulletCount = 3; // 총알 수
+
+            for (int i = 0; i < bulletCount; i++)
+            {
+                float angle = (i - (bulletCount - 1) / 2f) * spreadAngle;
+
+                // `lastMovementDirection`을 기준으로 총알 발사 방향 설정
+                Quaternion rotation = Quaternion.LookRotation(Vector3.forward, lastMovementDirection) * Quaternion.Euler(0, 0, angle);
+
+                GameObject shotBullet = Instantiate(currentWeapon.bulletPrefab, firePoint.position, Quaternion.identity);
+                Rigidbody2D shotBulletRb = shotBullet.GetComponent<Rigidbody2D>();
+
+                // 총알의 방향을 `rotation * Vector2.up`으로 설정
+                Vector2 bulletDirection = rotation * Vector2.up;
+
+                // 디버깅 로그
+                Debug.Log($"Bullet Angle: {angle}, Bullet Direction: {bulletDirection}, Rotation: {rotation.eulerAngles}");
+
+                shotBulletRb.velocity = bulletDirection * 15f;
+            }
+        }
+    }
+
+
+
+
+
+
+    void PreviousWeapon()
+    {
+        if (weapons.Length == 0) return;
+
+        currentWeaponIndex--;
+        if (currentWeaponIndex < 0)
+        {
+            currentWeaponIndex = weapons.Length - 1;
+        }
+        Debug.Log("Player 1 weapon changed to: " + weapons[currentWeaponIndex].weaponType);
+    }
+
+    void NextWeapon()
+    {
+        if (weapons.Length == 0) return;
+
+        currentWeaponIndex++;
+        if (currentWeaponIndex >= weapons.Length)
+        {
+            currentWeaponIndex = 0;
+        }
+        Debug.Log("Player 1 weapon changed to: " + weapons[currentWeaponIndex].weaponType);
     }
 }
+
