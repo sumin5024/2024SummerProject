@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Player2Controller : MonoBehaviour
@@ -12,8 +13,9 @@ public class Player2Controller : MonoBehaviour
     private Vector2 movement;
     private Vector2 lastMovementDirection;
 
-    SpriteRenderer spriter;
-    Animator anim;
+    private SpriteRenderer spriter;
+    private Animator anim;
+
     //스피드 부스트 영역
     public float SpeedBoostMul = 2f;
     public float SpeedBoostDuration = 8f;
@@ -21,10 +23,6 @@ public class Player2Controller : MonoBehaviour
     private bool isSpeedBoostActive = false;
     private bool isSpeedBoostCooldown = false;
     //스피드 부스트 아이템 영역 끝
-
-    private SpriteRenderer spriter;
-    private Animator anim;
-
 
     void Awake()
     {
@@ -49,18 +47,18 @@ public class Player2Controller : MonoBehaviour
             Shoot();
         }
 
-        if(Input.GetKeyDown(KeyCode.U) && !isSpeedBoostActive && !isSpeedBoostCooldown) {
+        if (Input.GetKeyDown(KeyCode.U) && !isSpeedBoostActive && !isSpeedBoostCooldown)
+        {
             StartCoroutine(ActivateSpeedBoost());
+        }
 
-
-        if (Input.GetKeyDown(KeyCode.LeftBracket)) // 2 키
+        if (Input.GetKeyDown(KeyCode.LeftBracket)) // [ 키
         {
             PreviousWeapon();
         }
-        if (Input.GetKeyDown(KeyCode.RightBracket)) // 3 키
+        if (Input.GetKeyDown(KeyCode.RightBracket)) // ] 키
         {
             NextWeapon();
-
         }
     }
 
@@ -127,11 +125,6 @@ public class Player2Controller : MonoBehaviour
         }
     }
 
-
-
-
-
-
     void PreviousWeapon()
     {
         if (weapons.Length == 0) return;
@@ -155,26 +148,26 @@ public class Player2Controller : MonoBehaviour
         }
         Debug.Log("Player 2 weapon changed to: " + weapons[currentWeaponIndex].weaponType);
     }
-    IEnumerator ActivateSpeedBoost() {
+
+    IEnumerator ActivateSpeedBoost()
+    {
         isSpeedBoostActive = true;
         moveSpeed *= SpeedBoostMul;
 
         yield return new WaitForSeconds(SpeedBoostDuration);
 
-        moveSpeed /=SpeedBoostMul;
-        isSpeedBoostActive = !isSpeedBoostActive;
+        moveSpeed /= SpeedBoostMul;
+        isSpeedBoostActive = false;
 
         StartCoroutine(SpeedBoostCooldown());
-
     }
 
-    IEnumerator SpeedBoostCooldown() {
+    IEnumerator SpeedBoostCooldown()
+    {
         isSpeedBoostCooldown = true;
 
         yield return new WaitForSeconds(SpeedBoostCooldownDuration);
 
-         isSpeedBoostCooldown = false;
-
+        isSpeedBoostCooldown = false;
     }
 }
-
