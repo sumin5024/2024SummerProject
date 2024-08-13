@@ -157,7 +157,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   pl2health: 100
-  bulletPrefab: {fileID: 6210878583170791971, guid: c261d336d5fdb45bb89aecdb61d615a6, type: 3}
+  weapons:
+  - weaponType: 0
+    bulletPrefab: {fileID: 6210878583170791971, guid: c261d336d5fdb45bb89aecdb61d615a6, type: 3}
+  - weaponType: 1
+    bulletPrefab: {fileID: 6210878583170791971, guid: c261d336d5fdb45bb89aecdb61d615a6, type: 3}
   firePoint: {fileID: 106469926}
 --- !u!50 &2146917
 Rigidbody2D:
@@ -1351,8 +1355,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   pl1health: 100
-  pl1maxhealth: 100
-  bulletPrefab: {fileID: 6210878583170791971, guid: c261d336d5fdb45bb89aecdb61d615a6, type: 3}
+  weapons:
+  - weaponType: 0
+    bulletPrefab: {fileID: 6210878583170791971, guid: c261d336d5fdb45bb89aecdb61d615a6, type: 3}
+  - weaponType: 1
+    bulletPrefab: {fileID: 6210878583170791971, guid: c261d336d5fdb45bb89aecdb61d615a6, type: 3}
   firePoint: {fileID: 804780371}
 --- !u!70 &1053571404
 CapsuleCollider2D:
