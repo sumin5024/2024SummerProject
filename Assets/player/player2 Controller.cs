@@ -98,6 +98,10 @@ public class Player2Controller : MonoBehaviour
             GameObject bullet = Instantiate(currentWeapon.bulletPrefab, firePoint.position, Quaternion.identity);
             Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
             bulletRb.velocity = lastMovementDirection * 20f;
+
+            // 발사 방향에 맞게 이미지 회전
+            float angle = Mathf.Atan2(lastMovementDirection.y, lastMovementDirection.x) * Mathf.Rad2Deg;
+            bullet.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
         }
         else if (currentWeapon.weaponType == WeaponType.Shotgun)
         {
@@ -106,24 +110,21 @@ public class Player2Controller : MonoBehaviour
 
             for (int i = 0; i < bulletCount; i++)
             {
-                float angle = (i - (bulletCount - 1) / 2f) * spreadAngle;
+                float angleOffset = (i - (bulletCount - 1) / 2f) * spreadAngle;
 
-                // `lastMovementDirection`을 기준으로 총알 발사 방향 설정
-                Quaternion rotation = Quaternion.LookRotation(Vector3.forward, lastMovementDirection) * Quaternion.Euler(0, 0, angle);
+                float angle = Mathf.Atan2(lastMovementDirection.y, lastMovementDirection.x) * Mathf.Rad2Deg + angleOffset;
 
                 GameObject shotBullet = Instantiate(currentWeapon.bulletPrefab, firePoint.position, Quaternion.identity);
                 Rigidbody2D shotBulletRb = shotBullet.GetComponent<Rigidbody2D>();
 
-                // 총알의 방향을 `rotation * Vector2.up`으로 설정
-                Vector2 bulletDirection = rotation * Vector2.up;
-
-                // 디버깅 로그
-                Debug.Log($"Bullet Angle: {angle}, Bullet Direction: {bulletDirection}, Rotation: {rotation.eulerAngles}");
-
+                Vector2 bulletDirection = Quaternion.Euler(0, 0, angleOffset) * lastMovementDirection;
                 shotBulletRb.velocity = bulletDirection * 15f;
+
+                shotBullet.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
             }
         }
     }
+
 
     void PreviousWeapon()
     {
