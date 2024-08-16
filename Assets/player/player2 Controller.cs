@@ -45,17 +45,17 @@ public class Player2Controller : MonoBehaviour
             lastMovementDirection = movement.normalized;
         }
 
-        if (Input.GetKeyDown(KeyCode.O)) // O 키
+        if (Input.GetKeyDown(KeyCode.M)) // O 키
         {
             Shoot();
         }
 
-        if (Input.GetKeyDown(KeyCode.U) && !isSpeedBoostActive && !isSpeedBoostCooldown)
+        if (Input.GetKeyDown(KeyCode.J) && !isSpeedBoostActive && !isSpeedBoostCooldown)
         {
             StartCoroutine(ActivateSpeedBoost());
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftBracket)) // [ 키
+        if (Input.GetKeyDown(KeyCode.Comma)) //  키
         {
             OtherWeapon();
         }
