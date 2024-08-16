@@ -19,8 +19,10 @@ public class EnemyAttack : EnemyManager
     {
         if (collision.collider.tag == "Player")
         {
+            Debug.Log("ìŠ¤ì¼ˆë ˆí†¤ ì¶©ëŒë‚¨");
             StartCoroutine(StopMoving(stopDuration));
             Invoke("CheckPlayerDistanceAttack", stopDuration);
+            gm1.instance.health1-=attackDamage;
         }
     }
 
@@ -35,12 +37,12 @@ public class EnemyAttack : EnemyManager
         float distanceToPlayer = Vector3.Distance(Player.transform.position, gameObject.transform.position);
         if (distanceToPlayer <= detectionRange)
         {
-            Debug.Log("ÇÃ·¹ÀÌ¾î °¨ÁöµÊ!");
+            Debug.Log("ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!");
             isDetection = true;
         }
         else
         {
-            Debug.Log("ÇÃ·¹ÀÌ¾î °¨ÁöµÇÁö ¾ÊÀ½.");
+            Debug.Log("ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.");
             isDetection = false;
         }
         if (CanAttack())
@@ -59,12 +61,12 @@ public class EnemyAttack : EnemyManager
         float distanceToPlayer = Vector3.Distance(Player.transform.position, gameObject.transform.position);
         if (distanceToPlayer <= attackRange)
         {
-            Debug.Log("ÇÃ·¹ÀÌ¾î¿¡°Ô ÇÇÇØ¸¦ ÀÔÈû.");
+            Debug.Log("ï¿½Ã·ï¿½ï¿½Ì¾î¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¸ï¿½ ï¿½ï¿½ï¿½ï¿½.");
 
         }
         else
         {
-            Debug.Log("ÇÃ·¹ÀÌ¾î°¡ °ø°İ ¹üÀ§ ¹Û¿¡ ÀÖÀ½.");
+            Debug.Log("ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½.");
         }
     }
     void Start()

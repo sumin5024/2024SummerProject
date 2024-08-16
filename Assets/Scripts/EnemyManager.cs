@@ -18,6 +18,8 @@ public class EnemyManager : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
 
+    public int collisionDamage = 10;
+
     public GameObject Player;
     private SpriteRenderer spriteRenderer;
 
@@ -128,6 +130,17 @@ public class EnemyManager : MonoBehaviour
         else
         {
             spriteRenderer.flipX = false;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Player")
+        {
+            Debug.Log("기본 적 충돌남");
+            StartCoroutine(StopMoving(stopDuration));
+            Invoke("CheckPlayerDistanceAttack", stopDuration);
+            gm1.instance.health1 -= collisionDamage;
         }
     }
 }

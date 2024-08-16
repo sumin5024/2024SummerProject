@@ -23,11 +23,14 @@ public class HUD : MonoBehaviour
             case InfoType.Exp:
                 break;
             case InfoType.Health:
-                //float CurHealth1 = PlayerController.instance.health;
+                float curHealth = gm1.instance.health1;
+                float maxHealth = gm1.instance.maxHealth1;
+                mySlider.value = curHealth / maxHealth;
                 break;
             case InfoType.Kill:
                 break;
             case InfoType.Level:
+                myText.text = string.Format("Wave.{0:F0}",gm1.instance.level);    
                 break;
             case InfoType.Time:
                 break;

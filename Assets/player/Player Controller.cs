@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class Player1Controller : MonoBehaviour
@@ -17,7 +15,10 @@ public class Player1Controller : MonoBehaviour
     private bool isSpeedBoostActive = false;
     private bool isSpeedBoostCooldown = false;
     //스피드 부스트 아이템 영역 끝
+
     private int currentWeaponIndex = 0; // 현재 무기 인덱스
+    private int shotgunFireCount = 0; // 샷건 발사 횟수 카운트
+    private bool isShotgunCooldown = false; // 샷건 발사 제한 여부
 
     private Rigidbody2D rb;
     private Vector2 movement;
@@ -55,12 +56,9 @@ public class Player1Controller : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha2)) // 숫자 2 키
         {
-            PreviousWeapon();
+            OtherWeapon();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3)) // 숫자 3 키
-        {
-            NextWeapon();
-        }
+        
     }
 
     void FixedUpdate()
@@ -94,18 +92,14 @@ public class Player1Controller : MonoBehaviour
 
         Weapon currentWeapon = weapons[currentWeaponIndex];
 
-        if (currentWeapon.weaponType == WeaponType.Pistol)
+        if (currentWeapon.weaponType == WeaponType.Shotgun)
         {
-            GameObject bullet = Instantiate(currentWeapon.bulletPrefab, firePoint.position, Quaternion.identity);
-            Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
-            bulletRb.velocity = lastMovementDirection * 20f;
+            if (isShotgunCooldown)
+            {
+                Debug.Log("Shotgun is cooling down!");
+                return;
+            }
 
-            // 발사 방향에 맞게 이미지 회전
-            float angle = Mathf.Atan2(lastMovementDirection.y, lastMovementDirection.x) * Mathf.Rad2Deg;
-            bullet.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
-        }
-        else if (currentWeapon.weaponType == WeaponType.Shotgun)
-        {
             float spreadAngle = 10f; // 총알 퍼지는 각도
             int bulletCount = 3; // 총알 수
 
@@ -123,12 +117,37 @@ public class Player1Controller : MonoBehaviour
 
                 shotBullet.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
             }
+
+            shotgunFireCount++;
+
+            if (shotgunFireCount >= 10)
+            {
+                StartCoroutine(ShotgunCooldown());
+            }
+        }
+        else if (currentWeapon.weaponType == WeaponType.Pistol)
+        {
+            GameObject bullet = Instantiate(currentWeapon.bulletPrefab, firePoint.position, Quaternion.identity);
+            Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
+            bulletRb.velocity = lastMovementDirection * 20f;
+
+            // 발사 방향에 맞게 이미지 회전
+            float angle = Mathf.Atan2(lastMovementDirection.y, lastMovementDirection.x) * Mathf.Rad2Deg;
+            bullet.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
         }
     }
 
+    IEnumerator ShotgunCooldown()
+    {
+        isShotgunCooldown = true;
+        Debug.Log("Shotgun is on cooldown for 5 seconds.");
+        yield return new WaitForSeconds(5f); // 5초 동안 샷건 발사 제한
+        shotgunFireCount = 0;
+        isShotgunCooldown = false;
+        Debug.Log("Shotgun cooldown is over.");
+    }
 
-
-    void PreviousWeapon()
+    void OtherWeapon()
     {
         if (weapons.Length == 0) return;
 
@@ -140,17 +159,6 @@ public class Player1Controller : MonoBehaviour
         Debug.Log("Player 1 weapon changed to: " + weapons[currentWeaponIndex].weaponType);
     }
 
-    void NextWeapon()
-    {
-        if (weapons.Length == 0) return;
-
-        currentWeaponIndex++;
-        if (currentWeaponIndex >= weapons.Length)
-        {
-            currentWeaponIndex = 0;
-        }
-        Debug.Log("Player 1 weapon changed to: " + weapons[currentWeaponIndex].weaponType);
-    }
 
     IEnumerator ActivateSpeedBoost()
     {

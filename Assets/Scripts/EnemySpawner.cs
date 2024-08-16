@@ -21,8 +21,8 @@ public class EnemySpawner : MonoBehaviour
 
     public int enemiesRemaining = 0;
     public Wave[] waves = new Wave[10];
-    public float spawnTime = 50.0f; // »ý¼ºÁÖ±â
-    private bool isSpawning = false;  // ½ºÆù »óÅÂ
+    public float spawnTime = 50.0f; // ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
+    private bool isSpawning = false;  // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public int currentWaveIndex = 0;
 
     private void Awake()
@@ -35,7 +35,7 @@ public class EnemySpawner : MonoBehaviour
     {
         
         
-        public int[] enemyCount = new int[5]; // Àû ¼ýÀÚ
+        public int[] enemyCount = new int[5]; // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
        
         public GameObject[] enemyPrefab = new GameObject[5] { Enemy1, Enemy2, Enemy3, Enemy4, Enemy5 };
     }
@@ -70,16 +70,17 @@ public class EnemySpawner : MonoBehaviour
 
     public void NextWave()
     {
-        if(enemiesRemaining == 0 && !isSpawning)
+        if(enemiesRemaining <= 0 && !isSpawning)
         {
             currentWaveIndex++;
+            gm1.instance.level++;
             if(currentWaveIndex < waves.Length)
             {
                 StartCoroutine(StartWave());
             }
             else
             {
-                Debug.Log("¸ðµç ¿þÀÌºê ³¡");
+                Debug.Log("ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½");
             }
         }
     }
