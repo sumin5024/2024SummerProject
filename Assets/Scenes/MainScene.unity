@@ -133,9 +133,9 @@ GameObject:
   - component: {fileID: 2146920}
   - component: {fileID: 2146919}
   - component: {fileID: 2146917}
-  - component: {fileID: 2146916}
   - component: {fileID: 2146921}
   - component: {fileID: 2146922}
+  - component: {fileID: 2146923}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Player
@@ -143,29 +143,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2146916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2146915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d839e7b7f39aba449956fba38eadcdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  pl2health: 100
-  weapons:
-  - weaponType: 0
-    bulletPrefab: {fileID: 6210878583170791971, guid: c261d336d5fdb45bb89aecdb61d615a6, type: 3}
-  - weaponType: 1
-    bulletPrefab: {fileID: 6210878583170791971, guid: c261d336d5fdb45bb89aecdb61d615a6, type: 3}
-  firePoint: {fileID: 106469926}
-  SpeedBoostMul: 2
-  SpeedBoostDuration: 8
-  SpeedBoostCooldownDuration: 10
 --- !u!50 &2146917
 Rigidbody2D:
   serializedVersion: 4
@@ -318,6 +295,29 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2146923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d839e7b7f39aba449956fba38eadcdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  pl2health: 100
+  weapons:
+  - weaponType: 0
+    bulletPrefab: {fileID: 6210878583170791971, guid: c261d336d5fdb45bb89aecdb61d615a6, type: 3}
+  - weaponType: 1
+    bulletPrefab: {fileID: 6210878583170791971, guid: c261d336d5fdb45bb89aecdb61d615a6, type: 3}
+  firePoint: {fileID: 106469926}
+  SpeedBoostMul: 2
+  SpeedBoostDuration: 8
+  SpeedBoostCooldownDuration: 10
 --- !u!1001 &21671498
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1989,7 +1989,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01765dc2166996f41a635ac8574c5d44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponImage: {fileID: 0}
+  weaponImage: {fileID: 1193392256}
   rifleSprite: {fileID: -144335857, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
   shotgunSprite: {fileID: 1772703093, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
 --- !u!114 &1193392256
