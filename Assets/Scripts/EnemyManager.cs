@@ -112,7 +112,10 @@ public class EnemyManager : MonoBehaviour
             }
             UpdateDirection(Player.transform.position);
         }
+        
     }
+
+    
 
 
     private void MoveTowardsPlayer()
@@ -141,6 +144,7 @@ public class EnemyManager : MonoBehaviour
             StartCoroutine(StopMoving(stopDuration));
             Invoke("CheckPlayerDistanceAttack", stopDuration);
             gm1.instance.health1 -= collisionDamage;
+            
         }
     }
 }

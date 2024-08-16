@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class Player1Controller : MonoBehaviour
 {
+    private Animator animator;
+    private Collider2D coll;
+
     public float moveSpeed = 5f;
     public int pl1health = 100;
     public Weapon[] weapons; // 무기 배열
@@ -180,5 +183,18 @@ public class Player1Controller : MonoBehaviour
         yield return new WaitForSeconds(SpeedBoostCooldownDuration);
 
         isSpeedBoostCooldown = false;
+    }
+
+    public void OnCollisionStay2D(Collision2D collision)
+    {
+        if (!gm1.instance.isLive)
+            return;
+
+        gm1.instance.health1 -= Time.deltaTime*10;
+        
+        if(gm1.instance.health1 < 0)
+        {
+            animator.SetTrigger("Dead");
+        }
     }
 }
