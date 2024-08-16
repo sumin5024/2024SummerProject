@@ -5,12 +5,9 @@ using UnityEngine;
 
 public class gm1 : MonoBehaviour
 {
-    private Animator animator;
-    private Collider2D coll;
-    
     public static gm1 instance;
         [Header("# Game Control")]
-        public bool isLive = true;
+        public bool isLive;
         public float gameTime;
         public float maxGameTime = 2 * 10f;
         [Header("# Player Info")]
@@ -23,51 +20,49 @@ public class gm1 : MonoBehaviour
 
         public int kill;
         public int exp;
+
+        public int coin = 0;
     
         [Header("# Game Object")]
         //public Result uiResult;
         public Transform uiJoy;
         public GameObject enemyCleaner;
 
+        private bool isRecoveryCooldown = false;
 
-    void Awake() 
-    {
-        if (instance == null) 
-        {
-         instance = this;
-        } 
-        else 
-        {
-            Destroy(gameObject);
-        }
-        DontDestroyOnLoad(gameObject);
+
+    void Awake() {
+    if (instance == null) {
+        instance = this;
+    } else {
+        Destroy(gameObject);
     }
-    
-    void Start()
-    {
+    DontDestroyOnLoad(gameObject);
+}
+    void UseRecoveryItem() {
+        health1 = maxHealth1;
+        StartCoroutine(RecoveryItemCooldown());
+    }
+
+    IEnumerator RecoveryItemCooldown() {
+        isRecoveryCooldown = true;
+        yield return new WaitForSeconds(30f);
+        isRecoveryCooldown = false;
+
+    }
+
+
+    void Start(){
         health1=maxHealth1;
         level = EnemySpawner.Instance.currentWaveIndex + 1;
     }
-
-    public void GameOver()
-    {
-        StartCoroutine(GameOverRoutine());
-    }
-
-    IEnumerator GameOverRoutine()
-    {
-        isLive = false;
-
-        yield return new WaitForSeconds(0.5f);
-
     
-    }
-    void Update()
-    {
-        
+    void Update() {
+        if (Input.GetKeyDown(KeyCode.Y) && !isRecoveryCooldown && coin>=20)
+        {
+            UseRecoveryItem();
+            coin -= 20;
+        }
 
     }
-    
-
-    
 }

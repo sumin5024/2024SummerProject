@@ -3,10 +3,7 @@ using UnityEngine;
 
 public class Player2Controller : MonoBehaviour
 {
-    private Animator animator;
-    private Collider2D coll;
     public float moveSpeed = 5f;
-    public int pl2health = 100;
     public Weapon[] weapons; // 무기 배열
     public Transform firePoint;
 
@@ -52,9 +49,10 @@ public class Player2Controller : MonoBehaviour
             Shoot();
         }
 
-        if (Input.GetKeyDown(KeyCode.J) && !isSpeedBoostActive && !isSpeedBoostCooldown)
+        if (Input.GetKeyDown(KeyCode.J) && !isSpeedBoostActive && !isSpeedBoostCooldown && gm1.instance.coin>=10)
         {
             StartCoroutine(ActivateSpeedBoost());
+            gm1.instance.coin -=10;
         }
 
         if (Input.GetKeyDown(KeyCode.Comma)) //  키
@@ -185,6 +183,4 @@ public class Player2Controller : MonoBehaviour
 
         isSpeedBoostCooldown = false;
     }
-
-   
 }

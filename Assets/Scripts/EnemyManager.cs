@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -25,6 +26,7 @@ public class EnemyManager : MonoBehaviour
 
 
     private Attract_Item attractItem;
+
 
 
     private void MoveTowardsTarget(Vector3 target)
@@ -66,6 +68,7 @@ public class EnemyManager : MonoBehaviour
                 Ecollider.enabled = false;
             }
             Die();
+            gm1.instance.coin += 1; // 자석 = 5, 빨라지기 = 10, 체력회복 = 20
         }
     }
 
@@ -112,10 +115,7 @@ public class EnemyManager : MonoBehaviour
             }
             UpdateDirection(Player.transform.position);
         }
-        
     }
-
-    
 
 
     private void MoveTowardsPlayer()
@@ -144,7 +144,6 @@ public class EnemyManager : MonoBehaviour
             StartCoroutine(StopMoving(stopDuration));
             Invoke("CheckPlayerDistanceAttack", stopDuration);
             gm1.instance.health1 -= collisionDamage;
-            
         }
     }
 }

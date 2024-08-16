@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Attract_Item : MonoBehaviour
 {
-    public Transform player1Transform; // ÇÃ·¹ÀÌ¾î 1ÀÇ Transform
-    public Transform player2Transform; // ÇÃ·¹ÀÌ¾î 2ÀÇ Transform
+    public Transform player1Transform; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ 1ï¿½ï¿½ Transform
+    public Transform player2Transform; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ 2ï¿½ï¿½ Transform
 
     private Vector3 targetPosition;
     public float attractDuration = 5f;
@@ -25,17 +25,19 @@ public class Attract_Item : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && !isCooldown)
+        if (Input.GetKeyDown(KeyCode.Q) && !isCooldown && gm1.instance.coin >=5)
         {
-            Debug.Log("ÇÃ·¹ÀÌ¾î 1 Å°°¡ ´­·ÁÁ³½À´Ï´Ù. ÇÃ·¹ÀÌ¾î À§Ä¡ ÀúÀå Áß...");
+            Debug.Log("ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ 1 Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½...");
             StorePlayerPosition(player1Transform);
             UseAttractItem();
+            gm1.instance.coin -= 5;
         }
         if (Input.GetKeyDown(KeyCode.P) && !isCooldown)
         {
-            Debug.Log("ÇÃ·¹ÀÌ¾î 2 Å°°¡ ´­·ÁÁ³½À´Ï´Ù. ÇÃ·¹ÀÌ¾î À§Ä¡ ÀúÀå Áß...");
+            Debug.Log("ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ 2 Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½...");
             StorePlayerPosition(player2Transform);
             UseAttractItem();
+            gm1.instance.coin -= 5;
         }
     }
 
@@ -45,11 +47,11 @@ public class Attract_Item : MonoBehaviour
         {
             targetPosition = playerTransform.position;
             targetPosition.z = 0;
-            Debug.Log("¸ñÇ¥ À§Ä¡ ¼³Á¤: " + targetPosition);
+            Debug.Log("ï¿½ï¿½Ç¥ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½: " + targetPosition);
         }
         else
         {
-            Debug.LogError("ÇÃ·¹ÀÌ¾î TransformÀÌ ÁöÁ¤µÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+            Debug.LogError("ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ Transformï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò½ï¿½ï¿½Ï´ï¿½.");
         }
     }
 
@@ -65,7 +67,7 @@ public class Attract_Item : MonoBehaviour
 
     IEnumerator ActivateAttract()
     {
-        Debug.Log("¾ÆÀÌÅÛ È°¼ºÈ­µÊ");
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­ï¿½ï¿½");
         isAttractActive = true;
         isCooldown = true;
         yield return new WaitForSeconds(attractDuration);
@@ -74,10 +76,10 @@ public class Attract_Item : MonoBehaviour
         {
             attractItemImage.SetActive(false);
         }
-        Debug.Log("¾ÆÀÌÅÛ ºñÈ°¼ºÈ­µÊ");
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ï¿½ï¿½");
         yield return new WaitForSeconds(cooldownDuration);
         isCooldown = false;
-        Debug.Log("Äð´Ù¿î ¿Ï·á");
+        Debug.Log("ï¿½ï¿½Ù¿ï¿½ ï¿½Ï·ï¿½");
     }
 
     public bool IsAttractActive()
