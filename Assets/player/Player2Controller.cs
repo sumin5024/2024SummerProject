@@ -1,8 +1,11 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Player2Controller : MonoBehaviour
 {
+    public static Player2Controller instance;
+    public static Player1Controller player1;
     public float moveSpeed = 5f;
     public Weapon[] weapons; // 무기 배열
     public Transform firePoint;
@@ -16,7 +19,7 @@ public class Player2Controller : MonoBehaviour
     private Vector2 lastMovementDirection;
 
     private SpriteRenderer spriter;
-    private Animator anim;
+    public Animator anim;
 
     //스피드 부스트 영역
     public float SpeedBoostMul = 2f;
@@ -25,6 +28,8 @@ public class Player2Controller : MonoBehaviour
     private bool isSpeedBoostActive = false;
     private bool isSpeedBoostCooldown = false;
     //스피드 부스트 아이템 영역 끝
+
+    
 
     void Awake()
     {
@@ -182,5 +187,30 @@ public class Player2Controller : MonoBehaviour
         yield return new WaitForSeconds(SpeedBoostCooldownDuration);
 
         isSpeedBoostCooldown = false;
+    }
+
+    public void HandlePlayerDeath1()
+    {
+        if (gm1.instance.health1 <= 0)
+        {
+            anim.SetTrigger("dead");
+            if (player1 != null)
+            {
+                player1.HandlePlayerDeath2();
+            }
+        }
+    }
+
+    public void HandlePlayerDeath2()
+    {
+        anim.SetTrigger("dead");
+        gm1.instance.EndGameWithDelay();
+    }
+    private void Start()
+    {
+        if (player1 == null)
+        {
+            player1 = FindObjectOfType<Player1Controller>();
+        }
     }
 }

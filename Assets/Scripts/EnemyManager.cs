@@ -96,7 +96,7 @@ public class EnemyManager : MonoBehaviour
         attractItem = FindObjectOfType<Attract_Item>();
         animator = GetComponent<Animator>();
         //bc = GetComponent<BoxCollider2D>();
-        
+     
     }
 
 
@@ -140,10 +140,21 @@ public class EnemyManager : MonoBehaviour
     {
         if (collision.collider.tag == "Player")
         {
+            Player1Controller player1 = collision.gameObject.GetComponent<Player1Controller>();
+            Player2Controller player2 = collision.gameObject.GetComponent<Player2Controller>();
             Debug.Log("기본 적 충돌남");
             StartCoroutine(StopMoving(stopDuration));
-            Invoke("CheckPlayerDistanceAttack", stopDuration);
+            //Invoke("CheckPlayerDistanceAttack", stopDuration);
             gm1.instance.health1 -= collisionDamage;
+            if(player1 != null)
+            {
+                player1.HandlePlayerDeath1();
+            }
+            if(player2 != null)
+            {
+                player2.HandlePlayerDeath1();
+            }
+
         }
     }
 }

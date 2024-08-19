@@ -51,6 +51,25 @@ public class gm1 : MonoBehaviour
 
     }
 
+    public void EndGame()
+    {
+        Time.timeScale = 0f;
+
+        Debug.Log("Game Over");
+        MonoBehaviour[] allBehaviours = FindObjectsOfType<MonoBehaviour>();
+        foreach (var behaviour in allBehaviours)
+        {
+            behaviour.enabled = false;
+        }
+    }
+
+    public void EndGameWithDelay()
+    {
+        Invoke("EndGame", 1f); // 1초 후에 EndGame 메서드 호출
+    }
+
+
+
 
     void Start(){
         health1=maxHealth1;

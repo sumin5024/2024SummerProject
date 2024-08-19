@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Player1Controller : MonoBehaviour
 {
+    public static Player1Controller instance;
+    public static Player2Controller player2;
     public float moveSpeed = 5f;
     public Weapon[] weapons; // 무기 배열
     public Transform firePoint;
@@ -23,8 +25,9 @@ public class Player1Controller : MonoBehaviour
     private Vector2 movement;
     private Vector2 lastMovementDirection;
     private SpriteRenderer spriter;
-    private Animator anim;
+    public Animator anim;
 
+    
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -180,5 +183,30 @@ public class Player1Controller : MonoBehaviour
         yield return new WaitForSeconds(SpeedBoostCooldownDuration);
 
         isSpeedBoostCooldown = false;
+    }
+
+    public void HandlePlayerDeath1()
+    {
+        if(gm1.instance.health1 <= 0)
+        {
+            anim.SetTrigger("dead");
+            if(player2 != null)
+            {
+                player2.HandlePlayerDeath2();
+            }
+        }
+    }
+    public void HandlePlayerDeath2()
+    {
+        anim.SetTrigger("dead");
+        gm1.instance.EndGameWithDelay();
+    }
+
+    private void Start()
+    {
+        if (player2 == null)
+        {
+            player2 = FindObjectOfType<Player2Controller>();
+        }
     }
 }

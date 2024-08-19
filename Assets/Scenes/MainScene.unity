@@ -308,13 +308,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  pl2health: 100
   weapons:
   - weaponType: 0
     bulletPrefab: {fileID: 6210878583170791971, guid: c261d336d5fdb45bb89aecdb61d615a6, type: 3}
   - weaponType: 1
     bulletPrefab: {fileID: 6210878583170791971, guid: c261d336d5fdb45bb89aecdb61d615a6, type: 3}
   firePoint: {fileID: 106469926}
+  anim: {fileID: 0}
   SpeedBoostMul: 2
   SpeedBoostDuration: 8
   SpeedBoostCooldownDuration: 10
@@ -1460,6 +1460,7 @@ MonoBehaviour:
   level: 0
   kill: 0
   exp: 0
+  coin: 0
   uiJoy: {fileID: 0}
   enemyCleaner: {fileID: 0}
 --- !u!4 &832597580
@@ -1816,11 +1817,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1053571398}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e0243a840c804f409ddb3a6f0c4adaa, type: 3}
+  m_Script: {fileID: 11500000, guid: 55110c723466c404493bae544d2a544c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  pl1health: 100
   weapons:
   - weaponType: 0
     bulletPrefab: {fileID: 6210878583170791971, guid: c261d336d5fdb45bb89aecdb61d615a6, type: 3}
@@ -1830,6 +1830,7 @@ MonoBehaviour:
   SpeedBoostMul: 2
   SpeedBoostDuration: 8
   SpeedBoostCooldownDuration: 10
+  anim: {fileID: 0}
 --- !u!70 &1053571404
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
