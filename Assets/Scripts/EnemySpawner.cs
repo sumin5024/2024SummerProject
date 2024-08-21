@@ -46,6 +46,7 @@ public class EnemySpawner : MonoBehaviour
         Wave currentWave = waves[currentWaveIndex];
         //yield return new WaitForSeconds(spawnTime);
         // YLocation = Random.Range(minYLocation, maxYLocation);
+        enemiesRemaining = 0;
         isSpawning = true;
 
         for (int i = 0; i < currentWave.enemyPrefab.Length; i++)

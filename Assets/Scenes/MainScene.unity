@@ -330,6 +330,14 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 1053571398}
+    - target: {fileID: 3231794406451782414, guid: 6b4953020074a34498f87d5e0550ffd4, type: 3}
+      propertyPath: player1
+      value: 
+      objectReference: {fileID: 1053571400}
+    - target: {fileID: 3231794406451782414, guid: 6b4953020074a34498f87d5e0550ffd4, type: 3}
+      propertyPath: player2
+      value: 
+      objectReference: {fileID: 2146920}
     - target: {fileID: 5523167682883385100, guid: 6b4953020074a34498f87d5e0550ffd4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.85
@@ -395,6 +403,14 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 1053571398}
+    - target: {fileID: 2587841933339096637, guid: befd2eb17b8a40d42abf05db1c28100e, type: 3}
+      propertyPath: player1
+      value: 
+      objectReference: {fileID: 1053571400}
+    - target: {fileID: 2587841933339096637, guid: befd2eb17b8a40d42abf05db1c28100e, type: 3}
+      propertyPath: player2
+      value: 
+      objectReference: {fileID: 2146920}
     - target: {fileID: 3936318543585895336, guid: befd2eb17b8a40d42abf05db1c28100e, type: 3}
       propertyPath: m_Name
       value: Skeleton
@@ -872,6 +888,14 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 1053571398}
+    - target: {fileID: 2630422871184633229, guid: a95bc0d7c5e634642b7add3f1350a1a1, type: 3}
+      propertyPath: player1
+      value: 
+      objectReference: {fileID: 1053571400}
+    - target: {fileID: 2630422871184633229, guid: a95bc0d7c5e634642b7add3f1350a1a1, type: 3}
+      propertyPath: player2
+      value: 
+      objectReference: {fileID: 2146920}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1613,6 +1637,14 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 1053571398}
+    - target: {fileID: 3155671228588840336, guid: 2f0e7fc863b1144428e623f71b15e685, type: 3}
+      propertyPath: player1
+      value: 
+      objectReference: {fileID: 1053571400}
+    - target: {fileID: 3155671228588840336, guid: 2f0e7fc863b1144428e623f71b15e685, type: 3}
+      propertyPath: player2
+      value: 
+      objectReference: {fileID: 2146920}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2517,7 +2549,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.005
-  player: {fileID: 1053571400}
+  player1: {fileID: 0}
+  player2: {fileID: 0}
   maxHealth: 100
   currentHealth: 0
   collisionDamage: 10
@@ -66238,6 +66271,14 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 1053571398}
+    - target: {fileID: 2531525427141178681, guid: 7ba6a776c6e6c8a4785b910c2151f451, type: 3}
+      propertyPath: player1
+      value: 
+      objectReference: {fileID: 1053571400}
+    - target: {fileID: 2531525427141178681, guid: 7ba6a776c6e6c8a4785b910c2151f451, type: 3}
+      propertyPath: player2
+      value: 
+      objectReference: {fileID: 2146920}
     - target: {fileID: 5842044177100236888, guid: 7ba6a776c6e6c8a4785b910c2151f451, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.3

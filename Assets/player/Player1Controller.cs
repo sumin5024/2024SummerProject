@@ -202,6 +202,14 @@ public class Player1Controller : MonoBehaviour
         gm1.instance.EndGameWithDelay();
     }
 
+    /*private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.collider.tag == "Enemy")
+        {
+
+        }
+    }*/
+
     private void Start()
     {
         if (player2 == null)
