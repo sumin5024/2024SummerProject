@@ -18,8 +18,8 @@ public class Player1Controller : MonoBehaviour
     //스피드 부스트 아이템 영역 끝
 
     private int currentWeaponIndex = 0; // 현재 무기 인덱스
-    private int shotgunFireCount = 0; // 샷건 발사 횟수 카운트
-    private bool isShotgunCooldown = false; // 샷건 발사 제한 여부
+    public int shotgunFireCount = 0; // 샷건 발사 횟수 카운트
+    public bool isShotgunCooldown = false; // 샷건 발사 제한 여부
 
     private Rigidbody2D rb;
     private Vector2 movement;
@@ -30,6 +30,15 @@ public class Player1Controller : MonoBehaviour
     
     void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
         rb = GetComponent<Rigidbody2D>();
         spriter = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();

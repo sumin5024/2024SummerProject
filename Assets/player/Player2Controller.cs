@@ -11,7 +11,7 @@ public class Player2Controller : MonoBehaviour
     public Transform firePoint;
 
     private int currentWeaponIndex = 0; // 현재 무기 인덱스
-    private int shotgunFireCount = 0; // 샷건 발사 횟수 카운트
+    public int shotgunFireCount = 0; // 샷건 발사 횟수 카운트
     private bool isShotgunCooldown = false; // 샷건 발사 제한 여부
 
     private Rigidbody2D rb;
@@ -33,6 +33,15 @@ public class Player2Controller : MonoBehaviour
 
     void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
         rb = GetComponent<Rigidbody2D>();
         spriter = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
