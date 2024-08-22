@@ -16,7 +16,8 @@ public class Player2Controller : MonoBehaviour
 
     private Rigidbody2D rb;
     private Vector2 movement;
-    private Vector2 lastMovementDirection;
+    private Vector2 lastMovementDirection = Vector2.right; // 초기 방향을 오른쪽으로 설정
+
 
     private SpriteRenderer spriter;
     public Animator anim;
