@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class ShotgunBulletP2GUI : MonoBehaviour
 {
-    public TextMeshProUGUI P2shotgunBullet;
+    public Text P2shotgunBullet;
     public int P2shotgunBulletCount;
 
     // Start is called before the first frame update

@@ -1,17 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement; // SceneManager¸¦ »ç¿ëÇÏ±â À§ÇØ Ãß°¡
+using UnityEngine.SceneManagement;
 
 public class gm1 : MonoBehaviour
 {
     public static gm1 instance;
 
     [Header("# Game Control")]
-    public bool isLive = true; // °ÔÀÓÀÌ ½ÃÀÛµÉ ¶§ true·Î ¼³Á¤
+    public bool isLive = true; // ê²Œì„ ìƒíƒœ ì´ˆê¸°í™”
     public float gameTime;
-    public float maxGameTime = 2 * 10f;
+    public float maxGameTime = 20f;
 
     [Header("# Player Info")]
     public int playerId;
@@ -29,25 +28,25 @@ public class gm1 : MonoBehaviour
     public GameObject enemyCleaner;
 
     private bool isRecoveryCooldown = false;
-    private bool isGamePaused = false; // °ÔÀÓ ÀÏ½Ã ÁßÁö »óÅÂ È®ÀÎÀ» À§ÇÑ º¯¼ö
+    private bool isGamePaused = false;
 
     void Awake()
     {
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject); // ê²Œì„ ë§¤ë‹ˆì €ë¥¼ ì”¬ ì „í™˜ ì‹œ íŒŒê´´ë˜ì§€ ì•Šë„ë¡ ì„¤ì •
         }
         else
         {
             Destroy(gameObject);
+            return; // ì´ ê°ì²´ë¥¼ íŒŒê´´í•œ í›„ ë” ì´ìƒ ì§„í–‰í•˜ì§€ ì•ŠìŒ
         }
-        DontDestroyOnLoad(gameObject);
     }
 
     void Start()
     {
-        health1 = maxHealth1;
-        level = EnemySpawner.Instance.currentWaveIndex + 1;
+        InitializeGame();
     }
 
     void Update()
@@ -58,17 +57,29 @@ public class gm1 : MonoBehaviour
             coin -= 20;
         }
 
-        // °ÔÀÓÀÌ Á¾·áµÇ¾úÀ» ¶§¿¡µµ Enter Å°·Î Àç½ÃÀÛ °¡´ÉÇÏ°Ô ¼³Á¤
-        if (!isLive && Input.GetKeyDown(KeyCode.Return))
+        // ì—”í„° í‚¤ë¡œ ê²Œì„ ì¬ì‹œì‘
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             RestartGame();
         }
 
-        // ½ºÆäÀÌ½º¹Ù·Î °ÔÀÓ ÀÏ½Ã ÁßÁö/Àç°³
+        // ìŠ¤í˜ì´ìŠ¤ë°”ë¡œ ê²Œì„ ì¼ì‹œ ì¤‘ì§€/ì¬ê°œ
         if (Input.GetKeyDown(KeyCode.Space))
         {
             TogglePauseGame();
         }
+    }
+
+    void InitializeGame()
+    {
+        isLive = true;
+        health1 = maxHealth1; // í”Œë ˆì´ì–´ ì²´ë ¥ ì´ˆê¸°í™”
+        health2 = maxHealth2; // í”Œë ˆì´ì–´ ì²´ë ¥ ì´ˆê¸°í™”
+        level = 1;
+        kill = 0;
+        exp = 0;
+        coin = 0;
+        Time.timeScale = 1f; // ì‹œê°„ ìŠ¤ì¼€ì¼ ì´ˆê¸°í™”
     }
 
     void UseRecoveryItem()
@@ -85,39 +96,59 @@ public class gm1 : MonoBehaviour
     }
 
     public void EndGame()
-    {
-        isLive = false; // °ÔÀÓ Á¾·á »óÅÂ·Î ¼³Á¤
-        Time.timeScale = 0f;
+{
+    isLive = false;
+    Time.timeScale = 0f;
 
-        Debug.Log("Game Over");
-        MonoBehaviour[] allBehaviours = FindObjectsOfType<MonoBehaviour>();
-        foreach (var behaviour in allBehaviours)
+    Debug.Log("Game Over");
+    MonoBehaviour[] allBehaviours = FindObjectsOfType<MonoBehaviour>();
+    foreach (var behaviour in allBehaviours)
+    {
+        // gm1 ì¸ìŠ¤í„´ìŠ¤ ìì‹ ì€ ë¹„í™œì„±í™”í•˜ì§€ ì•ŠìŒ
+        if (behaviour != this)
         {
             behaviour.enabled = false;
         }
     }
+}
+
 
     public void EndGameWithDelay()
     {
-        Invoke("EndGame", 1f); // 1ÃÊ ÈÄ¿¡ EndGame ¸Ş¼­µå È£Ãâ
+        Invoke("EndGame", 1f); // 1ì´ˆ í›„ì— EndGame ë©”ì„œë“œ í˜¸ì¶œ
     }
 
-    // °ÔÀÓ Àç½ÃÀÛ ÇÔ¼ö
+    // ê²Œì„ ì¬ì‹œì‘ í•¨ìˆ˜
     void RestartGame()
     {
-        // ÇöÀç ¾ÀÀ» ´Ù½Ã ·ÎµåÇÏ¿© °ÔÀÓÀ» Àç½ÃÀÛ
+        SceneManager.sceneLoaded += OnSceneLoaded; // ì”¬ ë¡œë“œ í›„ ì´ˆê¸°í™”í•˜ë„ë¡ ì½œë°± ë“±ë¡
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        Time.timeScale = 1f; // °ÔÀÓ ½Ã°£ ´Ù½Ã Á¤»óÈ­
-        isLive = true; // °ÔÀÓÀ» Àç½ÃÀÛÇÒ ¶§ isLive¸¦ true·Î ¼³Á¤
     }
 
-    // °ÔÀÓ ÀÏ½Ã ÁßÁö/Àç°³ ÇÔ¼ö
+    // ì”¬ì´ ë¡œë“œëœ í›„ í˜¸ì¶œë˜ëŠ” ì½œë°±
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        InitializeGame(); // ì”¬ì´ ë¡œë“œë  ë•Œ ê²Œì„ ìƒíƒœ ì´ˆê¸°í™”
+        SceneManager.sceneLoaded -= OnSceneLoaded; // ì½œë°± ì œê±°
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded; // ì”¬ ë¡œë“œ í›„ ì´ˆê¸°í™”í•˜ë„ë¡ ì½œë°± ë“±ë¡
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded; // ì”¬ ë¡œë“œ í›„ ì´ˆê¸°í™”ë¥¼ ìœ„í•œ ì½œë°± ì œê±°
+    }
+
+    // ê²Œì„ ì¼ì‹œ ì¤‘ì§€/ì¬ê°œ í•¨ìˆ˜
     public void TogglePauseGame()
     {
         isGamePaused = !isGamePaused;
         Time.timeScale = isGamePaused ? 0f : 1f;
 
-        // ¸ğµç EnemyManager ÀÎ½ºÅÏ½º¸¦ Ã£¾Æ¼­ ¸ØÃß°Å³ª Àç°³
+        // ëª¨ë“  EnemyManager ì¸ìŠ¤í„´ìŠ¤ë¥¼ ì°¾ì•„ì„œ ë©ˆì¶”ê±°ë‚˜ ì¬ê°œ
         EnemyManager[] enemies = FindObjectsOfType<EnemyManager>();
         foreach (var enemy in enemies)
         {

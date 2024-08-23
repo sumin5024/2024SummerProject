@@ -14,6 +14,8 @@ public class EnemyManager : MonoBehaviour
 
     private bool isPaused = false; // 일시 중지 상태 추적
 
+    private bool isDead = false; //적 사체
+
     public Transform player1;
     public Transform player2;
     private Transform targetPlayer;
@@ -95,6 +97,7 @@ public class EnemyManager : MonoBehaviour
 
     private void Die()
     {
+        isDead = true;
         animator.SetBool("Dead", true);
         StartCoroutine(StopMoving(1f));
         cc.isTrigger = true;
@@ -114,6 +117,7 @@ public class EnemyManager : MonoBehaviour
 
     void Update()
     {
+        if (isPaused || isDead) return;
         if (isPaused) return; // 일시 중지 상태에서 Update 중단
 
         float distanceToPlayer1 = Vector2.Distance(transform.position, player1.position);
@@ -167,4 +171,5 @@ public class EnemyManager : MonoBehaviour
             }
         }
     }
+    
 }
