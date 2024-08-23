@@ -82,6 +82,7 @@ public class gm1 : MonoBehaviour
     void UseRecoveryItem()
     {
         health1 = maxHealth1;
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Heal);
         StartCoroutine(RecoveryItemCooldown());
     }
 
@@ -98,6 +99,7 @@ public class gm1 : MonoBehaviour
     Time.timeScale = 0f;
 
     Debug.Log("Game Over");
+    AudioManager.instance.PlaySfx(AudioManager.Sfx.GameOver);
     MonoBehaviour[] allBehaviours = FindObjectsOfType<MonoBehaviour>();
     foreach (var behaviour in allBehaviours)
     {

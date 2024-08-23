@@ -82,6 +82,7 @@ public class EnemyManager : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Smash);
         animator.SetTrigger("Hit");
         if (currentHealth <= 0)
         {
@@ -162,6 +163,8 @@ public class EnemyManager : MonoBehaviour
             Debug.Log("기본 적 충돌남");
             StartCoroutine(StopMoving(stopDuration));
             gm1.instance.health1 -= collisionDamage;
+            Debug.Log("총알 소리남");
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
             if (player1 != null)
             {
                 player1.HandlePlayerDeath1();

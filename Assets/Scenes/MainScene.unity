@@ -562,7 +562,7 @@ MonoBehaviour:
   spawnYLocation: 10
   enemiesRemaining: 0
   waves:
-  - enemyCount: 0000000000000000000000000000000001000000
+  - enemyCount: 0a00000000000000000000000000000000000000
     enemyPrefab:
     - {fileID: 2577102462455862533}
     - {fileID: 54296405}
@@ -2657,6 +2657,62 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &563183044
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 563183046}
+  - component: {fileID: 563183045}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &563183045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563183044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19d327430a4b46947bc818d52e3b9ea0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmClip: {fileID: 0}
+  bgmVolume: 0
+  sfxClips:
+  - {fileID: 8300000, guid: 2fd4fd80515cbba4eade5c466fb96d32, type: 3}
+  - {fileID: 8300000, guid: 0bddcb411d826e14bb26d40ae45d8e22, type: 3}
+  - {fileID: 8300000, guid: 6b7eaf4532a2f614595ad58d2b86efc4, type: 3}
+  - {fileID: 8300000, guid: 4f5a942395010be439fc680cc3777f50, type: 3}
+  - {fileID: 8300000, guid: cb5e61598fd78834f96baa8510ff71d1, type: 3}
+  - {fileID: 8300000, guid: 85f3f4f08b4e3974c9c728588d6a84cd, type: 3}
+  - {fileID: 8300000, guid: a8fc8fe9e52d2af4aa75d8577fbf6a03, type: 3}
+  sfxVolume: 0.5
+  channels: 16
+--- !u!4 &563183046
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563183044}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.654982, y: 7.488991, z: -0.083715826}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -56361,3 +56417,4 @@ SceneRoots:
   - {fileID: 503392888}
   - {fileID: 1729648824}
   - {fileID: 2096235801}
+  - {fileID: 563183046}

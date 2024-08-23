@@ -30,14 +30,14 @@ public class Attract_Item : MonoBehaviour
             Debug.Log("�÷��̾� 1 Ű�� ���������ϴ�. �÷��̾� ��ġ ���� ��...");
             StorePlayerPosition(player1Transform);
             UseAttractItem();
-            gm1.instance.coin -= 5;
+            gm1.instance.coin -= 10;
         }
-        if (Input.GetKeyDown(KeyCode.P) && !isCooldown)
+        if (Input.GetKeyDown(KeyCode.K) && !isCooldown && gm1.instance.coin >= 5)
         {
             Debug.Log("�÷��̾� 2 Ű�� ���������ϴ�. �÷��̾� ��ġ ���� ��...");
             StorePlayerPosition(player2Transform);
             UseAttractItem();
-            gm1.instance.coin -= 5;
+            gm1.instance.coin -= 10;
         }
     }
 
