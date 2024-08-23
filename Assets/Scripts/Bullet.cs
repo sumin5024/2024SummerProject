@@ -38,6 +38,10 @@ public class Bullet : MonoBehaviour
         }
         else
         {
+            if(hitInfo.tag == "object")
+            {
+                Destroy(gameObject);
+            }
             Debug.Log("총알이 적이 아닌 객체에 맞음: " + hitInfo.name); // 다른 객체에 닿았을 때 메시지 출력
         }
     }

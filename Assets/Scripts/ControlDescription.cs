@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class ControlDescription : MonoBehaviour
 {
-    public GameObject explanationPanel; // ¼³¸í Ã¢ Panel
+    public GameObject explanationPanel;
+     // ï¿½ï¿½ï¿½ï¿½ Ã¢ Panel
 
     void Start()
     {
-        explanationPanel.SetActive(false); // ¼³¸í Ã¢À» ±âº»ÀûÀ¸·Î ¼û±è
+        explanationPanel.SetActive(false); // ï¿½ï¿½ï¿½ï¿½ Ã¢ï¿½ï¿½ ï¿½âº»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 
     public void ShowExplanation()
     {
-        explanationPanel.SetActive(true); // ¼³¸í Ã¢À» Ç¥½Ã
+        explanationPanel.SetActive(true); // ï¿½ï¿½ï¿½ï¿½ Ã¢ï¿½ï¿½ Ç¥ï¿½ï¿½
     }
 
     public void HideExplanation()
     {
-        explanationPanel.SetActive(false); // ¼³¸í Ã¢À» ¼û±è
+        explanationPanel.SetActive(false); // ï¿½ï¿½ï¿½ï¿½ Ã¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 }

@@ -116,6 +116,8 @@ public class EnemyManager : MonoBehaviour
         cc = GetComponent<CapsuleCollider2D>();
     }
 
+    
+
     void Update()
     {   
         if (EnemySpawner.Instance.enemiesRemaining <= 0)

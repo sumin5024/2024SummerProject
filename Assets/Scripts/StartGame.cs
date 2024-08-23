@@ -5,9 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class StartGame : MonoBehaviour
 {
+
     public void StartButton()
     {
-        // °ÔÀÓÀÇ ¸ÞÀÎ ¾ÀÀ» ·Îµå
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½
+        AudioManager.instance.PlayBgm(false);
         SceneManager.LoadScene("MainScene"); 
+    }
+    void Start()
+    {
+        AudioManager.instance.PlayBgm(true);
     }
 }

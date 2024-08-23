@@ -30,7 +30,7 @@ public class HUD : MonoBehaviour
             case InfoType.Kill:
                 break;
             case InfoType.Level:
-                myText.text = string.Format("Wave.{0:F0}",gm1.instance.level);    
+                myText.text = string.Format("Wave {0:F0}",gm1.instance.level);    
                 break;
             case InfoType.Time:
                 break;

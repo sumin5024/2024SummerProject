@@ -59,6 +59,7 @@ public class Attract_Item : MonoBehaviour
     {
         if (attractItemImage != null)
         {
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Mag);
             attractItemImage.transform.position = targetPosition;
             attractItemImage.SetActive(true);
         }

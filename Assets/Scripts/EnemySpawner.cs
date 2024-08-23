@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static UnityEditor.FilePathAttribute;
 
 public class EnemySpawner : MonoBehaviour
@@ -81,7 +82,9 @@ public class EnemySpawner : MonoBehaviour
             }
             else
             {
-                Debug.Log("��� ���̺� ��");
+                AudioManager.instance.PlayBgm(false);
+                gm1.instance.RestartGame();
+                SceneManager.LoadScene("EndScene");
             }
         }
     }
@@ -95,6 +98,9 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
- 
+        /*if(currentWaveIndex >= waves.Length)
+        {
+            SceneManager.LoadScene("EndScene");
+        }*/
     }
 }

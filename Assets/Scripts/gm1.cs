@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class gm1 : MonoBehaviour
 {
+    public GameObject Canvas2;
     public static gm1 instance;
 
     [Header("# Game Control")]
@@ -45,6 +46,7 @@ public class gm1 : MonoBehaviour
     void Start()
     {
         InitializeGame();
+        AudioManager.instance.PlayBgm(true);
     }
 
     void Update()
@@ -99,7 +101,9 @@ public class gm1 : MonoBehaviour
     Time.timeScale = 0f;
 
     Debug.Log("Game Over");
+    AudioManager.instance.PlayBgm(false);
     AudioManager.instance.PlaySfx(AudioManager.Sfx.GameOver);
+    
     MonoBehaviour[] allBehaviours = FindObjectsOfType<MonoBehaviour>();
     foreach (var behaviour in allBehaviours)
     {
@@ -109,6 +113,8 @@ public class gm1 : MonoBehaviour
             behaviour.enabled = false;
         }
     }
+    //Canvas2.SetActive(true);
+    
 }
 
 
@@ -118,8 +124,9 @@ public class gm1 : MonoBehaviour
     }
 
     // 게임 재시작 함수
-    void RestartGame()
+    public void RestartGame()
     {
+        AudioManager.instance.PlayBgm(false);
         SceneManager.sceneLoaded += OnSceneLoaded; // 씬 로드 후 초기화하도록 콜백 등록
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

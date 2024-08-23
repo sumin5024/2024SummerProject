@@ -118,7 +118,7 @@ public class Player2Controller : MonoBehaviour
 
             float spreadAngle = 10f; // 총알 퍼지는 각도
             int bulletCount = 3; // 총알 수
-
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Shot);
             for (int i = 0; i < bulletCount; i++)
             {
                 float angleOffset = (i - (bulletCount - 1) / 2f) * spreadAngle;
@@ -130,6 +130,7 @@ public class Player2Controller : MonoBehaviour
 
                 Vector2 bulletDirection = Quaternion.Euler(0, 0, angleOffset) * lastMovementDirection;
                 shotBulletRb.velocity = bulletDirection * 15f;
+                
 
                 shotBullet.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
             }
@@ -146,6 +147,7 @@ public class Player2Controller : MonoBehaviour
             GameObject bullet = Instantiate(currentWeapon.bulletPrefab, firePoint.position, Quaternion.identity);
             Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
             bulletRb.velocity = lastMovementDirection * 20f;
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Shot);
 
             // 발사 방향에 맞게 이미지 회전
             float angle = Mathf.Atan2(lastMovementDirection.y, lastMovementDirection.x) * Mathf.Rad2Deg;
