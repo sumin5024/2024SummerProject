@@ -16,8 +16,6 @@ public class gm1 : MonoBehaviour
     public int playerId;
     public float health1;
     public float maxHealth1 = 100;
-    public float health2;
-    public float maxHealth2 = 100;
     public int level;
     public int kill;
     public int exp;
@@ -74,7 +72,6 @@ public class gm1 : MonoBehaviour
     {
         isLive = true;
         health1 = maxHealth1; // 플레이어 체력 초기화
-        health2 = maxHealth2; // 플레이어 체력 초기화
         level = 1;
         kill = 0;
         exp = 0;
