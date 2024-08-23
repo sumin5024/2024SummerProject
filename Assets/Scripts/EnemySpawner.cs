@@ -66,7 +66,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy(GameObject enemyPrefab)
     {
-        Instantiate(enemyPrefab, new Vector3(10, YLocation), Quaternion.identity);
+        Instantiate(enemyPrefab, new Vector3(-49, Random.Range(-12.0f, 26.0f)), Quaternion.identity);
     }
 
     public void NextWave()
