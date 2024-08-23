@@ -116,7 +116,11 @@ public class EnemyManager : MonoBehaviour
     }
 
     void Update()
-    {
+    {   
+        if (EnemySpawner.Instance.enemiesRemaining <= 0)
+        {
+            EnemySpawner.Instance.NextWave();
+        }
         if (isPaused || isDead) return;
         if (isPaused) return; // 일시 중지 상태에서 Update 중단
 
@@ -146,10 +150,7 @@ public class EnemyManager : MonoBehaviour
             UpdateDirection(targetPlayer.transform.position);
         }
 
-        if (EnemySpawner.Instance.enemiesRemaining <= 0)
-        {
-            EnemySpawner.Instance.NextWave();
-        }
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
