@@ -116,6 +116,7 @@ public class Player1Controller : MonoBehaviour
 
             float spreadAngle = 10f; // 총알 퍼지는 각도
             int bulletCount = 3; // 총알 수
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Shot);
 
             for (int i = 0; i < bulletCount; i++)
             {
@@ -128,7 +129,7 @@ public class Player1Controller : MonoBehaviour
 
                 Vector2 bulletDirection = Quaternion.Euler(0, 0, angleOffset) * lastMovementDirection;
                 shotBulletRb.velocity = bulletDirection * 15f;
-                AudioManager.instance.PlaySfx(AudioManager.Sfx.Shot);
+                
 
                 shotBullet.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
             }
