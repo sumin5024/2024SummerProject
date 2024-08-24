@@ -206,6 +206,11 @@ public class Player2Controller : MonoBehaviour
         if (gm1.instance.health1 <= 0)
         {
             anim.SetTrigger("dead");
+             moveSpeed=0;
+            if (rb != null)
+            {
+                rb.isKinematic = true;
+            }
             if (player1 != null)
             {
                 player1.HandlePlayerDeath2();

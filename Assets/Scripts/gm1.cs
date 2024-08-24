@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class gm1 : MonoBehaviour
 {
+
+
     public GameObject Canvas2;
     public static gm1 instance;
 
@@ -98,6 +100,11 @@ public class gm1 : MonoBehaviour
 
     public void EndGame()
     {
+        
+        Player1Controller pMove1 = FindObjectOfType<Player1Controller>();
+        Player2Controller pMove2 = FindObjectOfType<Player2Controller>();
+        pMove1.enabled = false;
+        pMove2.enabled = false;
         isLive = false;
         Time.timeScale = 0f;
 
@@ -107,11 +114,8 @@ public class gm1 : MonoBehaviour
 
         Canvas2.SetActive(true);
 
-        Player1Controller pMove1 = FindObjectOfType<Player1Controller>();
-        Player2Controller pMove2 = FindObjectOfType<Player2Controller>();
-
-        pMove1.enabled = false;
-        pMove2.enabled = false;
+        
+        
 
     }
 

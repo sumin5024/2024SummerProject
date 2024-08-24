@@ -23,6 +23,7 @@ public class Player1Controller : MonoBehaviour
 
     private Rigidbody2D rb;
     private Vector2 movement;
+    
     private Vector2 lastMovementDirection = Vector2.right; // 초기 방향을 오른쪽으로 설정
 
     private SpriteRenderer spriter;
@@ -203,6 +204,13 @@ public class Player1Controller : MonoBehaviour
         if(gm1.instance.health1 <= 0)
         {
             anim.SetTrigger("dead");
+            // 게임 종료 시 Rigidbody의 물리 연산을 멈추게 합니다.
+            moveSpeed=0;
+            if (rb != null)
+            {
+                rb.isKinematic = true;
+            }
+            
             if(player2 != null)
             {
                 player2.HandlePlayerDeath2();
@@ -212,6 +220,7 @@ public class Player1Controller : MonoBehaviour
     public void HandlePlayerDeath2()
     {
         anim.SetTrigger("dead");
+        
         gm1.instance.EndGameWithDelay();
     }
 
