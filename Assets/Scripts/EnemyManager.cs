@@ -119,7 +119,12 @@ public class EnemyManager : MonoBehaviour
     
 
     void Update()
-    {   
+    {
+        if (!gm1.instance.isLive)
+        {
+            isMoving = false;
+        }
+
         if (EnemySpawner.Instance.enemiesRemaining <= 0)
         {
             EnemySpawner.Instance.NextWave();

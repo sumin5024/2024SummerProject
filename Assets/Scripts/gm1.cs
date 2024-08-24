@@ -34,7 +34,7 @@ public class gm1 : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // 게임 매니저를 씬 전환 시 파괴되지 않도록 설정
+            //DontDestroyOnLoad(gameObject); // 게임 매니저를 씬 전환 시 파괴되지 않도록 설정
         }
         else
         {
@@ -47,6 +47,7 @@ public class gm1 : MonoBehaviour
     {
         InitializeGame();
         AudioManager.instance.PlayBgm(true);
+        Canvas2.SetActive(false);
     }
 
     void Update()
@@ -96,26 +97,23 @@ public class gm1 : MonoBehaviour
     }
 
     public void EndGame()
-{
-    isLive = false;
-    Time.timeScale = 0f;
-
-    Debug.Log("Game Over");
-    AudioManager.instance.PlayBgm(false);
-    AudioManager.instance.PlaySfx(AudioManager.Sfx.GameOver);
-    
-    MonoBehaviour[] allBehaviours = FindObjectsOfType<MonoBehaviour>();
-    foreach (var behaviour in allBehaviours)
     {
-        // gm1 인스턴스 자신은 비활성화하지 않음
-        if (behaviour != this)
-        {
-            behaviour.enabled = false;
-        }
+        isLive = false;
+        Time.timeScale = 0f;
+
+        Debug.Log("Game Over");
+        AudioManager.instance.PlayBgm(false);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.GameOver);
+
+        Canvas2.SetActive(true);
+
+        Player1Controller pMove1 = FindObjectOfType<Player1Controller>();
+        Player2Controller pMove2 = FindObjectOfType<Player2Controller>();
+
+        pMove1.enabled = false;
+        pMove2.enabled = false;
+
     }
-    //Canvas2.SetActive(true);
-    
-}
 
 
     public void EndGameWithDelay()
