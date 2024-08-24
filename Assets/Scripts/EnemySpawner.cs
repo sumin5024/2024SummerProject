@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static UnityEditor.FilePathAttribute;
+//using static UnityEditor.FilePathAttribute;
 
 public class EnemySpawner : MonoBehaviour
 {
     public static EnemySpawner Instance;
-    [SerializeField] int maxYLocation = 5;
-    [SerializeField] int minYLocation = -5;
+    //[SerializeField] int maxYLocation = 5;
+    //[SerializeField] int minYLocation = -5;
     [SerializeField] int YLocation;
     [SerializeField] float minRespawnTime;
 
-    [SerializeField] int spawnYLocation = 3;
+    //[SerializeField] int spawnYLocation = 3;
     [SerializeField] static GameObject Enemy1;
     [SerializeField] static GameObject Enemy2;
     [SerializeField] static GameObject Enemy3;
